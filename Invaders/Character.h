@@ -12,13 +12,13 @@ public:
 	virtual ~Character( );
 	void update( );
 	void draw( WriterConstPtr drawer );
+	void setShooting( bool shoot );
 	bool isShooting( );
 	int getRatioX( );
 	int getRatioY( );
 	GRAPHIC getGraphic( );
 protected:
 	void setMoveSpeed( int move_speed );
-	void setShooting( bool shoot );
 	void toApproach( );
 	int getMoveSpeed( );
 private:

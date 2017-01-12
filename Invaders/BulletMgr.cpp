@@ -22,6 +22,7 @@ void BulletMgr::update( CharacterMgrPtr c_mgr ) {
 			for ( int i = 0; i < c_mgr->getCharacterSize( ); i++ ) {
 				CharacterPtr chara = c_mgr->getCharacter( i );
 				if ( chara->isShooting( ) ) {
+					chara->setShooting( false );
 					bool dir_down = true;
 					if ( chara->getGraphic( ) == GRAPHIC_PLAYER ) {
 						dir_down = false;

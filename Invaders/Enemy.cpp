@@ -11,7 +11,7 @@ Enemy::~Enemy( ) {
 
 void Enemy::actionMove( ) {
 	bool approach = false;
-	int x = ( getRatioX( ) + IVD_RATIO ) / IVD_RATIO;
+	int x = ( getRatioX( ) + RATIO ) / RATIO;
 	if ( x > SCREEN_WIDTH || x < 0 ) {
 		approach = true;
 	}

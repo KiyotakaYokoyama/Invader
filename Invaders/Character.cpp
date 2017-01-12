@@ -3,6 +3,8 @@
 #include "Enemy.h"
 #include "Defin.h"
 
+static const int APPROACH_LENGH = 20;
+
 Character::Character( GRAPHIC graph, int x, int y ) {
 	_graph = graph;
 	_ratio_x = x;
@@ -19,8 +21,8 @@ void Character::update( ) {
 }
 
 void Character::draw( WriterConstPtr drawer ) {
-	int x = _ratio_x / IVD_RATIO;
-	int y = _ratio_y / IVD_RATIO;
+	int x = _ratio_x / RATIO;
+	int y = _ratio_y / RATIO;
 
 	drawer->draw( _graph, x, y );
 }
@@ -52,7 +54,7 @@ void Character::setShooting( bool shoot ) {
 }
 
 void Character::toApproach( ) {
-	_ratio_y += CHARACTER_HEIGHT;
+	_ratio_y += APPROACH_LENGH;
 }
 
 int Character::getMoveSpeed( ) {

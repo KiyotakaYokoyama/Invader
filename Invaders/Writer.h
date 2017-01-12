@@ -9,5 +9,5 @@ class Writer {
 public:
 	Writer( );
 	virtual ~Writer( );
-	void draw( GRAPHIC graphic, int screen_x, int screen_y ) const;
+	void draw( GRAPHIC graphic, int screen_x, int screen_y, bool dir_down = false ) const;
 };

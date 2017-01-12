@@ -12,10 +12,11 @@ Writer::Writer( ) {
 Writer::~Writer( ) {
 }
 
-void Writer::draw( GRAPHIC graphic, int screen_x, int screen_y ) const {
+void Writer::draw( GRAPHIC graphic, int screen_x, int screen_y, bool dir_down ) const {
 	DrawerPtr drawer = Drawer::getTask( );
-	int tx = screen_x;
-	int ty = screen_y;
+
+	if ( dir_down ) {
+	}
 
 	Drawer::Transform trans( screen_x, screen_y );
 	Drawer::Sprite sprite( trans, graphic, Drawer::BLEND_NONE, 1.0 );

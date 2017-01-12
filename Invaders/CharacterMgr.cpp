@@ -2,12 +2,14 @@
 #include "Enemy.h"
 
 const int MAX_ENEMY_NUM = 2;
+const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
+const int PLAYER_START_POS_Y = ( SCREEN_HEIGHT - 100 ) * RATIO;
 
 CharacterMgr::CharacterMgr( ) {
-	_player = PlayerPtr( new Player( 10, 10 ) );
+	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
 	_characters.push_back( CharacterPtr( _player ) );
 
-	//initEnemys( );
+	initEnemys( );
 }
 
 CharacterMgr::~CharacterMgr( ) {
@@ -31,7 +33,7 @@ void CharacterMgr::draw( WriterConstPtr drawer ) {
 
 void CharacterMgr::initEnemys( ) {
 	for ( int i = 0; i < MAX_ENEMY_NUM; i++ ) {
-		int pos = ( i + 1 ) * 10;
+		int pos = ( i + 1 ) * 100;
 		_characters.push_back( CharacterPtr( new Enemy( pos , pos ) ) );
 	}
 }
