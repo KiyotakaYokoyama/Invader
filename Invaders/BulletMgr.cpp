@@ -38,7 +38,7 @@ void BulletMgr::update( CharacterMgrPtr c_mgr ) {
 	}
 }
 
-void BulletMgr::draw( InvadersDrawerConstPtr drawer ) {
+void BulletMgr::draw( WriterConstPtr drawer ) {
 	std::list< BulletPtr >::iterator ite = _bullets.begin( );
 	while ( ite != _bullets.end( ) ) {
 		(*ite)->draw( drawer );

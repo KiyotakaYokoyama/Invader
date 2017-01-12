@@ -2,7 +2,7 @@
 
 #include "Task.h"
 #include "smart_ptr.h"
-#include "InvadersDrawer.h"
+#include "Writer.h"
 #include "CharacterMgr.h"
 #include "BulletMgr.h"
 #include <string>
@@ -21,7 +21,7 @@ private:
 	void updateobj( );
 	void drawobj( );
 private:
-	InvadersDrawerPtr _drawer;
+	WriterPtr _drawer;
 	CharacterMgrPtr _characterMgr;
 	BulletMgrPtr _bulletMgr;
 };

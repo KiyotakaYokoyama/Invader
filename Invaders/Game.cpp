@@ -7,7 +7,7 @@ Game::~Game( ) {
 }
 
 void Game::initialize( ) {
-	_drawer = InvadersDrawerPtr( new InvadersDrawer( ) );
+	_drawer = WriterPtr( new Writer( ) );
 	_characterMgr = CharacterMgrPtr( new CharacterMgr( ) );
 	_bulletMgr = BulletMgrPtr( new BulletMgr( ) );
 }

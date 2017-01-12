@@ -21,7 +21,7 @@ void CharacterMgr::update( ) {
 	}
 }
 
-void CharacterMgr::draw( InvadersDrawerConstPtr drawer ) {
+void CharacterMgr::draw( WriterConstPtr drawer ) {
 	std::list< CharacterPtr >::iterator ite = _characters.begin( );
 	while ( ite != _characters.end( ) ) {
 		(*ite)->draw( drawer );

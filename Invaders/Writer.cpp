@@ -1,17 +1,18 @@
-#include "InvadersDrawer.h"
+#include "Writer.h"
 #include "Drawer.h"
+#include "defin.h"
 
-InvadersDrawer::InvadersDrawer( ) {
+Writer::Writer( ) {
 	DrawerPtr drawer = Drawer::getTask( );
-	drawer->loadGraph( GRAPHIC_PLAYER, "player.jpg" );
-	drawer->loadGraph( GRAPHIC_ENEMY, "enemy.jpg" );
+	drawer->loadGraph( GRAPHIC_PLAYER, "player_1.jpg" );
+	drawer->loadGraph( GRAPHIC_ENEMY, "enemy_1.jpg" );
 	drawer->loadGraph( GRAPHIC_BULLET, "bullet.jpg" );
 }
 
-InvadersDrawer::~InvadersDrawer( ) {
+Writer::~Writer( ) {
 }
 
-void InvadersDrawer::draw( GRAPHIC graphic, int screen_x, int screen_y ) const {
+void Writer::draw( GRAPHIC graphic, int screen_x, int screen_y ) const {
 	DrawerPtr drawer = Drawer::getTask( );
 	int tx = screen_x;
 	int ty = screen_y;

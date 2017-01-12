@@ -1,7 +1,7 @@
 #pragma once
 
 #include "smart_ptr.h"
-#include "InvadersDrawer.h"
+#include "Writer.h"
 
 PTR( Bullet );
 
@@ -11,7 +11,7 @@ public:
 	virtual ~Bullet( );
 	void initBullet( int x, int y, bool dir_down );
 	void update( );
-	void draw( InvadersDrawerConstPtr drawer );
+	void draw( WriterConstPtr drawer );
 	bool isDead( );
 private:
 	int _ratio_x;

@@ -4,7 +4,7 @@
 #include <list>
 #include "Character.h"
 #include "Player.h"
-#include "InvadersDrawer.h"
+#include "Writer.h"
 
 PTR( CharacterMgr );
 
@@ -13,7 +13,7 @@ public:
 	CharacterMgr( );
 	virtual ~CharacterMgr( );
 	void update( );
-	void draw( InvadersDrawerConstPtr drawer );
+	void draw( WriterConstPtr drawer );
 	int getCharacterSize( );
 	CharacterPtr getCharacter( int idx );
 private:

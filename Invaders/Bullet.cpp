@@ -23,7 +23,7 @@ void Bullet::update( ) {
 	}
 }
 
-void Bullet::draw( InvadersDrawerConstPtr drawer ) {
+void Bullet::draw( WriterConstPtr drawer ) {
 
 }
 

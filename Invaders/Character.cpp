@@ -18,7 +18,7 @@ void Character::update( ) {
 	moveVertical( );
 }
 
-void Character::draw( InvadersDrawerConstPtr drawer ) {
+void Character::draw( WriterConstPtr drawer ) {
 	int x = _ratio_x / IVD_RATIO;
 	int y = _ratio_y / IVD_RATIO;
 

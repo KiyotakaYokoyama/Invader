@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "Drawer.h"
 #include "Keyboard.h"
-#include "Defin.h"
+#include "defin.h"
 
 void main( ) {
 	TaskPtr game = GamePtr( new Game( ) );

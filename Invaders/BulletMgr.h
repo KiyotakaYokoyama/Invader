@@ -13,7 +13,7 @@ public:
 	BulletMgr( );
 	virtual ~BulletMgr( );
 	void update( CharacterMgrPtr c_mgr );
-	void draw( InvadersDrawerConstPtr drawer );
+	void draw( WriterConstPtr drawer );
 private:
 	std::list< BulletPtr > _bullets;
 };

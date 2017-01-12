@@ -3,11 +3,11 @@
 #include "smart_ptr.h"
 #include "Defin.h"
 
-PTR( InvadersDrawer );
+PTR( Writer );
 
-class InvadersDrawer {
+class Writer {
 public:
-	InvadersDrawer( );
-	virtual ~InvadersDrawer( );
+	Writer( );
+	virtual ~Writer( );
 	void draw( GRAPHIC graphic, int screen_x, int screen_y ) const;
 };

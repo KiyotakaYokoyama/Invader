@@ -2,7 +2,7 @@
 
 #include "smart_ptr.h"
 #include <list>
-#include "InvadersDrawer.h"
+#include "Writer.h"
 
 PTR( Character );
 
@@ -11,7 +11,7 @@ public:
 	Character( GRAPHIC graph, int x, int y );
 	virtual ~Character( );
 	void update( );
-	void draw( InvadersDrawerConstPtr drawer );
+	void draw( WriterConstPtr drawer );
 	bool isShooting( );
 	int getRatioX( );
 	int getRatioY( );
