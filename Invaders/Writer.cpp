@@ -4,9 +4,9 @@
 
 Writer::Writer( ) {
 	DrawerPtr drawer = Drawer::getTask( );
-	drawer->loadGraph( GRAPHIC_PLAYER, "player_1.jpg" );
-	drawer->loadGraph( GRAPHIC_ENEMY, "enemy_1.jpg" );
-	drawer->loadGraph( GRAPHIC_BULLET, "bullet.jpg" );
+	drawer->loadGraph( GRAPHIC_PLAYER, "player.png" );
+	drawer->loadGraph( GRAPHIC_ENEMY, "enemy.png" );
+	drawer->loadGraph( GRAPHIC_BULLET, "bullet.png" );
 }
 
 Writer::~Writer( ) {
