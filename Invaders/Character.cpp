@@ -102,6 +102,11 @@ bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
 void Character::moveVertical( ) {
 }
 
+void Character::hit( ) {	
+	_ratio_x = -100;
+	_ratio_y = -100;
+}
+
 void Character::setMoveSpeed( int move_speed ) {
 	_move_speed = move_speed;
 }

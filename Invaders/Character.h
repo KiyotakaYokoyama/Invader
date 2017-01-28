@@ -13,6 +13,7 @@ public:
 	void update( std::list< CharacterPtr > enemys );
 	void draw( WriterConstPtr drawer );
 	void setShooting( bool shoot );
+	void hit( );
 	virtual void initEnemy( int x, int y );
 	bool isShooting( );
 	int getRatioX( );

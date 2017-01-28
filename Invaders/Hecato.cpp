@@ -45,7 +45,15 @@ void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 	
 	while ( bullet_ite != bullet_list.end( ) ) {
 		while ( enemy_ite != enemy_list.end( ) ) {
-			isOverlapped( (*enemy_ite), (*bullet_ite)->getRatioX( ), (*bullet_ite)->getRatioY( ) );
+			int bullet_x = (*bullet_ite)->getRatioX( );
+			int bullet_y = (*bullet_ite)->getRatioY( );
+			if ( isOverlapped( (*enemy_ite), bullet_x + BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
+				 isOverlapped( (*enemy_ite), bullet_x + BULLET_WIDTH / 2, bullet_y				   ) ||
+				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
+				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
+				(*enemy_ite)->hit( );
+				(*bullet_ite)->hit( );
+			}
 			enemy_ite++;
 		}
 		enemy_ite = enemy_list.begin( );

@@ -27,7 +27,12 @@ void Bullet::draw( WriterConstPtr drawer ) {
 	int x = _ratio_x / RATIO;
 	int y = _ratio_y / RATIO;
 
-	drawer->draw( GRAPHIC_BULLET, x - BULLET_WIDTH / 2, y + BULLET_HEIGHT, _dir_down );
+	drawer->draw( GRAPHIC_BULLET, x - BULLET_WIDTH / 2, y - BULLET_HEIGHT, _dir_down );
+}
+
+void Bullet::hit( ) {
+	_ratio_x = -100;
+	_ratio_y = -100;
 }
 
 int Bullet::getRatioX( ) const {
