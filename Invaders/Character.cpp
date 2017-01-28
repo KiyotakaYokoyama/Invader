@@ -51,12 +51,14 @@ void Character::hitRight( ) {
 }
 
 void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
+	int ratio_x = _ratio_x + _move_speed;
+	int screen_r = ( SCREEN_WIDTH - CHARA_WIDTH / 2 ) * RATIO;
+	int screen_l = ( CHARA_WIDTH / 2 ) * RATIO;
 
-	int x = ( _ratio_x + RATIO ) / RATIO;
-	if ( x > SCREEN_WIDTH - CHARA_WIDTH / 2 ) {
+	if ( ratio_x > screen_r ) {
 		hitRight( );
 		return;
-	} else if( x < CHARA_WIDTH / 2 ) {
+	} else if( ratio_x < screen_l ) {
 		hitLeft( );
 		return;
 	}
