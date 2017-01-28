@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Defin.h"
+#include "Drawer.h"
 
 Character::Character( GRAPHIC graph, int x, int y ) {
 	_graph = graph;
@@ -19,13 +20,13 @@ void Character::update( std::list< CharacterPtr > enemys ) {
 }
 
 void Character::draw( WriterConstPtr drawer ) {
-	int x = _ratio_x / RATIO;
-	int y = _ratio_y / RATIO;
-
-	int sx = x - CHARA_WIDTH / 2;
-	int sy = y - CHARA_HEIGHT;
+	int sx = _ratio_x / RATIO;
+	int sy = _ratio_y / RATIO;
 
 	drawer->draw( _graph, sx, sy );
+
+	DrawerPtr draw = Drawer::getTask( );
+	draw->drawString( sx, sy, "Åõ" );
 }
 
 void Character::action( ) {
@@ -40,10 +41,12 @@ void Character::actionShoot( ) {
 }
 
 void Character::hitLeft( ) {
+	_ratio_x += RATIO;
 	_move_speed = 0;
 }
 
 void Character::hitRight( ) {
+	_ratio_x += -RATIO;
 	_move_speed = 0;
 }
 
@@ -57,7 +60,8 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 		hitLeft( );
 		return;
 	}
-
+	
+	/*
 	std::list< CharacterPtr >::iterator ite = enemys.begin( );
 	while ( ite != enemys.end( ) ) {
 		if ( (*ite) == shared_from_this( ) ) {
@@ -67,27 +71,29 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 
 		CharacterPtr target = (*ite);
 		// âEÇ…Ç‘Ç¬Ç©Ç¡ÇΩ
-		if ( isOverlapped( target, _ratio_x + CHARA_WIDTH / 2, _ratio_y - CHARA_HEIGHT ) ||
-			 isOverlapped( target, _ratio_x + CHARA_WIDTH / 2, _ratio_y ) ) {
+		int ratio_x = _ratio_x + ( CHARA_WIDTH / 2 * RATIO );
+		if ( isOverlapped( target, ratio_x, _ratio_y - ( CHARA_HEIGHT * RATIO ) ) ||
+			 isOverlapped( target, ratio_x, _ratio_y * RATIO ) ) {
 			hitRight( );
-		return;
+			return;
 		}
 		// ç∂Ç…Ç‘Ç¬Ç©Ç¡ÇΩ
-		if ( isOverlapped( target, _ratio_x - CHARA_WIDTH / 2, _ratio_y - CHARA_HEIGHT ) ||
-			 isOverlapped( target, _ratio_x - CHARA_WIDTH / 2, _ratio_y ) ) {
+		ratio_x = _ratio_x - ( CHARA_WIDTH / 2 * RATIO );
+		if ( isOverlapped( target, ratio_x, _ratio_y - ( CHARA_HEIGHT * RATIO ) ) ||
+			 isOverlapped( target, ratio_x, _ratio_y * RATIO ) ) {
 			hitLeft( );
-		return;
+			return;
 		}
 		ite++;
 	}
-
+	*/
 	_ratio_x += _move_speed;
 }
 
 bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
-	int tx1 = target->getRatioX( ) - CHARA_WIDTH / 2;
-	int tx2 = target->getRatioX( ) + CHARA_WIDTH / 2;
-	int ty1 = target->getRatioY( ) - CHARA_HEIGHT;
+	int tx1 = target->getRatioX( ) - ( CHARA_WIDTH / 2 * RATIO );
+	int tx2 = target->getRatioX( ) + ( CHARA_WIDTH / 2 * RATIO );
+	int ty1 = target->getRatioY( ) - ( CHARA_HEIGHT * RATIO );
 	int ty2 = target->getRatioY( );
 	return x > tx1 && x < tx2 && y > ty1 && y < ty2;
 }
