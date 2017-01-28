@@ -15,8 +15,9 @@ public:
 	virtual ~CharacterMgr( );
 	void update( );
 	void draw( WriterConstPtr drawer );
-	int getCharacterSize( );
-	CharacterPtr getCharacter( int idx );
+	int getEnemySize( ) const;
+	CharacterPtr getPlayer( ) const;
+	CharacterPtr getEnemys( int idx );
 private:
 	void initEnemys( );
 private:

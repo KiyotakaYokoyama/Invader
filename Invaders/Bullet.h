@@ -9,7 +9,7 @@ class Bullet {
 public:
 	Bullet( int x, int y );
 	virtual ~Bullet( );
-	void initBullet( int x, int y, bool dir_down );
+	void initBullet( int x, int y, bool dir_down = false );
 	void update( );
 	void draw( WriterConstPtr drawer );
 	bool isDead( );

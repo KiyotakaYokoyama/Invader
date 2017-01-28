@@ -19,15 +19,18 @@ void BulletMgr::update( CharacterMgrPtr c_mgr ) {
 		BulletPtr bullet = (*ite);
 
 		if ( bullet->isDead( ) ) {
-			for ( int i = 0; i < c_mgr->getCharacterSize( ); i++ ) {
-				CharacterPtr chara = c_mgr->getCharacter( i );
+			CharacterPtr chara = c_mgr->getPlayer( );
+			if ( chara->isShooting( ) ) {
+				chara->setShooting( false );
+				bullet->initBullet( chara->getRatioX( ) + CHARA_WIDTH / 2, chara->getRatioY( ) );
+				break;
+			}
+
+			for ( int i = 0; i < c_mgr->getEnemySize( ) - 1; i++ ) {
+				chara = c_mgr->getEnemys( i );
 				if ( chara->isShooting( ) ) {
 					chara->setShooting( false );
-					bool dir_down = true;
-					if ( chara->getGraphic( ) == GRAPHIC_PLAYER ) {
-						dir_down = false;
-					}
-					bullet->initBullet( chara->getRatioX( ), chara->getRatioY( ), dir_down );
+					bullet->initBullet( chara->getRatioX( ) + CHARA_WIDTH / 2, chara->getRatioY( ), true );
 					break;
 				}
 			}

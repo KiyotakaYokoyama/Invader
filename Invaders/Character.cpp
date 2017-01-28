@@ -63,7 +63,6 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 		return;
 	}
 	
-	/*
 	std::list< CharacterPtr >::iterator ite = enemys.begin( );
 	while ( ite != enemys.end( ) ) {
 		if ( (*ite) == shared_from_this( ) ) {
@@ -88,7 +87,7 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 		}
 		ite++;
 	}
-	*/
+	
 	_ratio_x += _move_speed;
 }
 

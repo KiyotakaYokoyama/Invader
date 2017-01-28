@@ -1,10 +1,11 @@
 #include "CharacterMgr.h"
 #include "Enemy.h"
+#include "defin.h"
 
-const int MAX_ENEMY_WEDTH_NUM = 2;
-const int MAX_ENEMY_HEIGHT_NUM = 2;
+const int MAX_ENEMY_WEDTH_NUM = 1;
+const int MAX_ENEMY_HEIGHT_NUM = 1;
 const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
-const int PLAYER_START_POS_Y = ( SCREEN_HEIGHT - 100 ) * RATIO;
+const int PLAYER_START_POS_Y = ( SCREEN_HEIGHT - CHARA_HEIGHT ) * RATIO;
 
 CharacterMgr::CharacterMgr( ) {
 	_player = CharacterPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
@@ -46,21 +47,21 @@ void CharacterMgr::initEnemys( ) {
 	}
 }
 
-int CharacterMgr::getCharacterSize( ) {
+int CharacterMgr::getEnemySize( ) const {
 	return _enemys.size( );
 }
 
-CharacterPtr CharacterMgr::getCharacter( int idx ) {
+CharacterPtr CharacterMgr::getPlayer( ) const {
+	return _player;
+}
+
+CharacterPtr CharacterMgr::getEnemys( int idx ) {
 	CharacterPtr result = CharacterPtr( );
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
 
 	for ( int i = 0; i <= idx; i++, ite++ ) {
-		if ( ite == _enemys.end( ) ) {
-			break;
-		}
 		result = (*ite);
 	}
-
-
+	
 	return result;
 }

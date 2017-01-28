@@ -6,7 +6,7 @@
 
 PTR( Character );
 
-class Character : public std::enable_shared_from_this< Character >{
+class Character : public std::enable_shared_from_this< Character > {
 public:
 	Character( GRAPHIC graph, int x, int y );
 	virtual ~Character( );
