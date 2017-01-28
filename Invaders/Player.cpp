@@ -2,7 +2,7 @@
 #include "Defin.h"
 #include "Keyboard.h"
 
-static const int MAX_SHOOT_COUNT = 20;
+static const int MAX_SHOOT_COUNT = 15;
 
 Player::Player( int x, int y ) :
 Character( GRAPHIC_PLAYER, x, y ) {

@@ -7,6 +7,7 @@
 #include "Writer.h"
 
 PTR( CharacterMgr );
+PTR( Character );
 
 class CharacterMgr {
 public:
@@ -19,6 +20,6 @@ public:
 private:
 	void initEnemys( );
 private:
-	PlayerPtr _player;
-	std::list< CharacterPtr > _characters;
+	CharacterPtr _player;
+	std::list< CharacterPtr > _enemys;
 };

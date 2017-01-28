@@ -4,6 +4,8 @@ static const int RATIO = 10;
 static const int MOVE_SPEED = 50;
 static const int SCREEN_WIDTH = 640;
 static const int SCREEN_HEIGHT = 480;
+static const int CHARA_WIDTH = 100;
+static const int CHARA_HEIGHT = 60;
 
 static const enum GRAPHIC {
 	GRAPHIC_NONE,

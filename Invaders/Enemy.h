@@ -9,7 +9,11 @@ class Enemy : public Character {
 public:
 	Enemy( int x, int y );
 	virtual ~Enemy( );
+	void initEnemy( int x, int y );
 private:
 	void actionMove( );
 	void actionShoot( );
+	void toApproach( );
+	void hitLeft( );
+	void hitRight( );
 };

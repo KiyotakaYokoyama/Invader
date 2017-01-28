@@ -10,18 +10,29 @@ Enemy::~Enemy( ) {
 }
 
 void Enemy::actionMove( ) {
-	bool approach = false;
-	int x = ( getRatioX( ) + RATIO ) / RATIO;
-	if ( x > SCREEN_WIDTH || x < 0 ) {
-		approach = true;
-	}
-	//if ( ƒLƒƒƒ‰“¯Žm‚Ì‚ ‚½‚è”»’è )
-
-	if ( approach ) {
-		setMoveSpeed( -getMoveSpeed( ) );
-		toApproach( );
-	}
 }
 
 void Enemy::actionShoot( ) {
+}
+
+void Enemy::toApproach( ) {
+	const int APPROACH_LENGH = 10 * RATIO;
+	setRatioY( getRatioY( ) + APPROACH_LENGH );
+}
+
+void Enemy::hitLeft( ) {
+	setMoveSpeed( MOVE_SPEED );
+	setRatioX( getRatioX( ) + RATIO );
+	toApproach( );
+}
+
+void Enemy::hitRight( ) {
+	setMoveSpeed( -MOVE_SPEED );
+	setRatioX( getRatioX( ) - RATIO );
+	toApproach( );
+}
+
+void Enemy::initEnemy( int x, int y ) {
+	setRatioX( x );
+	setRatioY( y );
 }
