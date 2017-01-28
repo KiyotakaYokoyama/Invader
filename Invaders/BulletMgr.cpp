@@ -13,31 +13,12 @@ BulletMgr::BulletMgr( ) {
 BulletMgr::~BulletMgr( ) {
 }
 
-void BulletMgr::update( CharacterMgrPtr c_mgr ) {
+void BulletMgr::update( ) {
 	std::list< BulletPtr >::iterator ite = _bullets.begin( );
 	while ( ite != _bullets.end( ) ) {
-		BulletPtr bullet = (*ite);
-
-		if ( bullet->isDead( ) ) {
-			CharacterPtr chara = c_mgr->getPlayer( );
-			if ( chara->isShooting( ) ) {
-				chara->setShooting( false );
-				bullet->initBullet( chara->getRatioX( ) + CHARA_WIDTH / 2, chara->getRatioY( ) );
-				break;
-			}
-
-			for ( int i = 0; i < c_mgr->getEnemySize( ) - 1; i++ ) {
-				chara = c_mgr->getEnemys( i );
-				if ( chara->isShooting( ) ) {
-					chara->setShooting( false );
-					bullet->initBullet( chara->getRatioX( ) + CHARA_WIDTH / 2, chara->getRatioY( ), true );
-					break;
-				}
-			}
-		} else {
-			bullet->update( );
+		if ( !(*ite)->isDead( ) ) {
+			(*ite)->update( );
 		}
-
 		ite++;
 	}
 }
@@ -48,4 +29,27 @@ void BulletMgr::draw( WriterConstPtr drawer ) {
 		(*ite)->draw( drawer );
 		ite++;
 	}
+}
+
+void BulletMgr::shotBullet( int num, int x, int y, bool dir_down ) {
+	std::list< BulletPtr >::iterator ite = _bullets.begin( );
+	for ( int i = 0; i < num; i++ ) {
+		ite++;
+	}
+	(*ite)->initBullet( x, y, dir_down );
+}
+
+int BulletMgr::getDeadBulletNum( ) {
+	int result = -1;
+
+	std::list< BulletPtr >::iterator ite = _bullets.begin( );
+	while ( ite != _bullets.end( ) ) {
+		if ( !(*ite)->isDead( ) ) {
+			break;
+		}
+		result++;
+		ite++;
+	}
+
+	return result;
 }

@@ -2,12 +2,13 @@
 
 #include "Task.h"
 #include "smart_ptr.h"
-#include "Writer.h"
-#include "CharacterMgr.h"
-#include "BulletMgr.h"
 #include <string>
 
 PTR( Game );
+PTR( Writer );
+PTR( CharacterMgr );
+PTR( BulletMgr );
+PTR( Hecato );
 
 class Game : public Task {
 public:
@@ -24,5 +25,6 @@ private:
 	WriterPtr _drawer;
 	CharacterMgrPtr _characterMgr;
 	BulletMgrPtr _bulletMgr;
+	HecatoPtr _hecato;
 };
 

@@ -12,8 +12,10 @@ class BulletMgr {
 public:
 	BulletMgr( );
 	virtual ~BulletMgr( );
-	void update( CharacterMgrPtr c_mgr );
+	void update( );
 	void draw( WriterConstPtr drawer );
+	void shotBullet( int num, int x, int y, bool dir_down = false );
+	int getDeadBulletNum( );
 private:
 	std::list< BulletPtr > _bullets;
 };

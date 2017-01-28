@@ -96,6 +96,7 @@
     <ClInclude Include="defin.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Hecato.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Writer.h" />
   </ItemGroup>
@@ -106,6 +107,7 @@
     <ClCompile Include="CharacterMgr.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Hecato.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Writer.cpp" />
