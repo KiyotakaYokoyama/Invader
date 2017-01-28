@@ -16,6 +16,7 @@ public:
 	void draw( WriterConstPtr drawer );
 	void shotBullet( int num, int x, int y, bool dir_down = false );
 	int getDeadBulletNum( );
+	std::list<BulletPtr> getBullets( );
 private:
 	std::list< BulletPtr > _bullets;
 };

@@ -23,7 +23,7 @@ void Character::draw( WriterConstPtr drawer ) {
 	int sx = _ratio_x / RATIO;
 	int sy = _ratio_y / RATIO;
 
-	drawer->draw( _graph, sx, sy );
+	drawer->draw( _graph, sx - CHARA_WIDTH / 2, sy - CHARA_HEIGHT );
 
 	DrawerPtr draw = Drawer::getTask( );
 	draw->drawString( sx, sy, "Åõ" );
@@ -92,8 +92,8 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 }
 
 bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
-	int tx1 = target->getRatioX( ) - ( CHARA_WIDTH / 2 * RATIO );
-	int tx2 = target->getRatioX( ) + ( CHARA_WIDTH / 2 * RATIO );
+	int tx1 = target->getRatioX( ) - ( CHARA_WIDTH * RATIO / 2 );
+	int tx2 = target->getRatioX( ) + ( CHARA_WIDTH * RATIO / 2 );
 	int ty1 = target->getRatioY( ) - ( CHARA_HEIGHT * RATIO );
 	int ty2 = target->getRatioY( );
 	return x > tx1 && x < tx2 && y > ty1 && y < ty2;

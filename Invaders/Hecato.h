@@ -2,6 +2,7 @@
 
 #include "smart_ptr.h"
 
+PTR( Character );
 PTR( CharacterMgr );
 PTR( BulletMgr );
 
@@ -12,5 +13,6 @@ public:
 	void update( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr );
 private:
 	void shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr );
-	void landing( );
+	void landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr );
+	bool isOverlapped( CharacterPtr target, int x, int y );
 };

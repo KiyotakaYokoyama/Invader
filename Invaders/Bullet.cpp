@@ -27,7 +27,15 @@ void Bullet::draw( WriterConstPtr drawer ) {
 	int x = _ratio_x / RATIO;
 	int y = _ratio_y / RATIO;
 
-	drawer->draw( GRAPHIC_BULLET, x, y, _dir_down );
+	drawer->draw( GRAPHIC_BULLET, x - BULLET_WIDTH / 2, y + BULLET_HEIGHT, _dir_down );
+}
+
+int Bullet::getRatioX( ) const {
+	return _ratio_x;
+}
+
+int Bullet::getRatioY( ) const {
+	return _ratio_y;
 }
 
 bool Bullet::isDead( ) {

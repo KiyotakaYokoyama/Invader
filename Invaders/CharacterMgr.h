@@ -17,6 +17,7 @@ public:
 	void draw( WriterConstPtr drawer );
 	int getEnemySize( ) const;
 	CharacterPtr getPlayer( ) const;
+	std::list<CharacterPtr> getEnemys( ) const;
 	CharacterPtr getEnemys( int idx );
 private:
 	void initEnemys( );

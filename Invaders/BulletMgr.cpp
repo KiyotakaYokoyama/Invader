@@ -53,3 +53,7 @@ int BulletMgr::getDeadBulletNum( ) {
 
 	return result;
 }
+
+std::list<BulletPtr> BulletMgr::getBullets( ) {
+	return _bullets;
+}

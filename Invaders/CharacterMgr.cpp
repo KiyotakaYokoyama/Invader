@@ -5,7 +5,7 @@
 const int MAX_ENEMY_WEDTH_NUM = 1;
 const int MAX_ENEMY_HEIGHT_NUM = 1;
 const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
-const int PLAYER_START_POS_Y = ( SCREEN_HEIGHT - CHARA_HEIGHT ) * RATIO;
+const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 
 CharacterMgr::CharacterMgr( ) {
 	_player = CharacterPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
@@ -53,6 +53,10 @@ int CharacterMgr::getEnemySize( ) const {
 
 CharacterPtr CharacterMgr::getPlayer( ) const {
 	return _player;
+}
+
+std::list<CharacterPtr> CharacterMgr::getEnemys( ) const {
+	return _enemys;
 }
 
 CharacterPtr CharacterMgr::getEnemys( int idx ) {

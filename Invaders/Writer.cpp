@@ -14,11 +14,7 @@ Writer::~Writer( ) {
 
 void Writer::draw( GRAPHIC graphic, int screen_x, int screen_y, bool dir_down ) const {
 	DrawerPtr drawer = Drawer::getTask( );
-
-	if ( dir_down ) {
-	}
-
-	Drawer::Transform trans( screen_x - CHARA_WIDTH / 2, screen_y - CHARA_HEIGHT );
+	Drawer::Transform trans( screen_x, screen_y );
 	Drawer::Sprite sprite( trans, graphic, Drawer::BLEND_NONE, 1.0 );
 	drawer->setSprite( sprite );
 }
