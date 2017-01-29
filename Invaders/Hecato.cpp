@@ -13,7 +13,7 @@ void Hecato::update( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 	landing( char_mgr, blt_mgr );
 }
 
-void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
+void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {/*
 	int num = blt_mgr->getDeadBulletNum( );
 	if ( num < 0 ) {
 		return;
@@ -33,7 +33,7 @@ void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 			blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ) - CHARA_HEIGHT * RATIO, true );
 			return;
 		}
-	}
+	}*/
 }
 
 void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {

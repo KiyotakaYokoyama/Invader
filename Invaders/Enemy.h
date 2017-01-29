@@ -16,4 +16,7 @@ private:
 	void toApproach( );
 	void hitLeft( );
 	void hitRight( );
+	void hitEnemy( std::list< CharacterPtr > enemys );
+private:
+	int _count;
 };

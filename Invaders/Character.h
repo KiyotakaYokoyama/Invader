@@ -14,25 +14,26 @@ public:
 	void draw( WriterConstPtr drawer );
 	void setShooting( bool shoot );
 	void hit( );
-	virtual void initEnemy( int x, int y );
 	bool isShooting( );
 	int getRatioX( );
 	int getRatioY( );
 	GRAPHIC getGraphic( );
+	virtual void initEnemy( int x, int y );
+	virtual void hitLeft( );
+	virtual void hitRight( );
 protected:
 	void setMoveSpeed( int move_speed );
 	void setRatioX( int ratio_x );
 	void setRatioY( int ratio_y );
 	int getMoveSpeed( );
-private:
-	void moveHorizontal( std::list< CharacterPtr > enemys );
-	void moveVertical( );
 	bool isOverlapped( CharacterPtr target, int x, int y );
+private:
 	void action( );
+	void moveVertical( );
+	virtual void moveHorizontal( std::list< CharacterPtr > enemys );
 	virtual void actionMove( );
 	virtual void actionShoot( );
-	virtual void hitLeft( );
-	virtual void hitRight( );
+	virtual void hitEnemy( std::list< CharacterPtr > enemys ) = 0;
 private:
 	int _ratio_x;
 	int _ratio_y;

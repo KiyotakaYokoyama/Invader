@@ -10,10 +10,18 @@ const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 CharacterMgr::CharacterMgr( ) {
 	_player = CharacterPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
 	
-	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM * MAX_ENEMY_HEIGHT_NUM; i++ ) {
-		int pos_x = ( ( ( i / MAX_ENEMY_WEDTH_NUM ) * CHARA_WIDTH ) + CHARA_WIDTH / 2 ) * RATIO;
-		int pos_y = ( ( ( i % MAX_ENEMY_HEIGHT_NUM ) * CHARA_HEIGHT ) + CHARA_HEIGHT ) * RATIO;
+	/*for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM * MAX_ENEMY_HEIGHT_NUM; i++ ) {
+		int pos_x = ( ( ( i / MAX_ENEMY_WEDTH_NUM ) * CHARA_WIDTH ) + CHARA_WIDTH / 2 + 6 ) * RATIO;
+		int pos_y = ( ( ( i % MAX_ENEMY_HEIGHT_NUM ) * CHARA_HEIGHT ) + CHARA_HEIGHT + 6 ) * RATIO;
 		_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y ) ) );
+	}*/
+
+	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
+		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
+			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
+			int pos_y = ( j * CHARA_HEIGHT + CHARA_HEIGHT ) * RATIO;
+			_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y ) ) );
+		}
 	}
 }
 

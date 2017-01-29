@@ -36,3 +36,6 @@ void Player::actionShoot( ) {
 		setShooting( true );
 	}
 }
+
+void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
+}

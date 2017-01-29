@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "Defin.h"
 
-static const int BULLET_SPEED = 50;
+static const int BULLET_SPEED = 100;
 
 Bullet::Bullet( int x, int y ) {
 }

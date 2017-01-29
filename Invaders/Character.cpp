@@ -26,7 +26,13 @@ void Character::draw( WriterConstPtr drawer ) {
 	drawer->draw( _graph, sx - CHARA_WIDTH / 2, sy - CHARA_HEIGHT );
 
 	DrawerPtr draw = Drawer::getTask( );
-	draw->drawString( sx, sy, "›" );
+	draw->drawString( sx, sy, "'" );
+
+	draw->drawString( sx-CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„¬" );
+	draw->drawString( sx-CHARA_WIDTH/2, sy, "„¯" );
+	draw->drawString( sx+CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„­" );
+	draw->drawString( sx+CHARA_WIDTH/2, sy, "„®" );
+
 }
 
 void Character::action( ) {
@@ -41,13 +47,9 @@ void Character::actionShoot( ) {
 }
 
 void Character::hitLeft( ) {
-	_ratio_x += RATIO;
-	_move_speed = 0;
 }
 
 void Character::hitRight( ) {
-	_ratio_x += -RATIO;
-	_move_speed = 0;
 }
 
 void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
@@ -62,31 +64,7 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 		hitLeft( );
 		return;
 	}
-	
-	std::list< CharacterPtr >::iterator ite = enemys.begin( );
-	while ( ite != enemys.end( ) ) {
-		if ( (*ite) == shared_from_this( ) ) {
-			ite++;
-			continue;
-		}
-
-		CharacterPtr target = (*ite);
-		// ‰E‚É‚Ô‚Â‚©‚Á‚½
-		int ratio_x = _ratio_x + ( CHARA_WIDTH / 2 * RATIO );
-		if ( isOverlapped( target, ratio_x, _ratio_y - ( CHARA_HEIGHT * RATIO ) ) ||
-			 isOverlapped( target, ratio_x, _ratio_y * RATIO ) ) {
-			hitRight( );
-			return;
-		}
-		// ¶‚É‚Ô‚Â‚©‚Á‚½
-		ratio_x = _ratio_x - ( CHARA_WIDTH / 2 * RATIO );
-		if ( isOverlapped( target, ratio_x, _ratio_y - ( CHARA_HEIGHT * RATIO ) ) ||
-			 isOverlapped( target, ratio_x, _ratio_y * RATIO ) ) {
-			hitLeft( );
-			return;
-		}
-		ite++;
-	}
+//	hitEnemy( enemys );
 	
 	_ratio_x += _move_speed;
 }
@@ -96,7 +74,7 @@ bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
 	int tx2 = target->getRatioX( ) + ( CHARA_WIDTH * RATIO / 2 );
 	int ty1 = target->getRatioY( ) - ( CHARA_HEIGHT * RATIO );
 	int ty2 = target->getRatioY( );
-	return x > tx1 && x < tx2 && y > ty1 && y < ty2;
+	return x >= tx1 && x <= tx2 && y >= ty1 && y <= ty2;
 }
 
 void Character::moveVertical( ) {

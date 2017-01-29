@@ -12,6 +12,7 @@ public:
 private:
 	void actionMove( );
 	void actionShoot( );
+	void hitEnemy( std::list< CharacterPtr > enemys );
 private:
 	int _shoot_count;
 };
