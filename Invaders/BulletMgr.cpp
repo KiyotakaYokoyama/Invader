@@ -1,5 +1,5 @@
 #include "BulletMgr.h"
-#include "Character.h"
+#include "Bullet.h"
 
 static const int MAX_BULLET_NUM = 100;
 
@@ -23,10 +23,10 @@ void BulletMgr::update( ) {
 	}
 }
 
-void BulletMgr::draw( WriterConstPtr drawer ) {
+void BulletMgr::draw( ) {
 	std::list< BulletPtr >::iterator ite = _bullets.begin( );
 	while ( ite != _bullets.end( ) ) {
-		(*ite)->draw( drawer );
+		(*ite)->draw( );
 		ite++;
 	}
 }

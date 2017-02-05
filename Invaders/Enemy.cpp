@@ -25,7 +25,7 @@ void Enemy::actionShoot( ) {
 }
 
 void Enemy::toApproach( ) {
-	const int APPROACH_LENGH = 10 * RATIO;
+	const int APPROACH_LENGH = 50 * RATIO;
 	setRatioY( getRatioY( ) + APPROACH_LENGH );
 }
 

@@ -1,21 +1,12 @@
 #include "CharacterMgr.h"
+#include "Player.h"
 #include "Enemy.h"
 #include "defin.h"
 
 const int MAX_ENEMY_WEDTH_NUM = 1;
 const int MAX_ENEMY_HEIGHT_NUM = 1;
-const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
-const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 
-CharacterMgr::CharacterMgr( ) {
-	_player = CharacterPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
-	
-	/*for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM * MAX_ENEMY_HEIGHT_NUM; i++ ) {
-		int pos_x = ( ( ( i / MAX_ENEMY_WEDTH_NUM ) * CHARA_WIDTH ) + CHARA_WIDTH / 2 + 6 ) * RATIO;
-		int pos_y = ( ( ( i % MAX_ENEMY_HEIGHT_NUM ) * CHARA_HEIGHT ) + CHARA_HEIGHT + 6 ) * RATIO;
-		_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y ) ) );
-	}*/
-
+CharacterMgr::CharacterMgr( ) {	
 	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
 		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
 			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
@@ -29,7 +20,6 @@ CharacterMgr::~CharacterMgr( ) {
 }
 
 void CharacterMgr::update( ) {
-	_player->update( _enemys );
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
 	while ( ite != _enemys.end( ) ) {
 		(*ite)->update( _enemys );
@@ -37,11 +27,10 @@ void CharacterMgr::update( ) {
 	}
 }
 
-void CharacterMgr::draw( WriterConstPtr drawer ) {
-	_player->draw( drawer );
+void CharacterMgr::draw( ) {
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
 	while ( ite != _enemys.end( ) ) {
-		(*ite)->draw( drawer );
+		(*ite)->draw( );
 		ite++;
 	}
 }
@@ -57,10 +46,6 @@ void CharacterMgr::initEnemys( ) {
 
 int CharacterMgr::getEnemySize( ) const {
 	return _enemys.size( );
-}
-
-CharacterPtr CharacterMgr::getPlayer( ) const {
-	return _player;
 }
 
 std::list<CharacterPtr> CharacterMgr::getEnemys( ) const {

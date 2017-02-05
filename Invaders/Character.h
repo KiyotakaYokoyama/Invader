@@ -1,8 +1,8 @@
 #pragma once
 
 #include "smart_ptr.h"
+#include "Defin.h"
 #include <list>
-#include "Writer.h"
 
 PTR( Character );
 
@@ -11,7 +11,7 @@ public:
 	Character( GRAPHIC graph, int x, int y );
 	virtual ~Character( );
 	void update( std::list< CharacterPtr > enemys );
-	void draw( WriterConstPtr drawer );
+	void draw( );
 	void setShooting( bool shoot );
 	void hit( );
 	bool isShooting( );

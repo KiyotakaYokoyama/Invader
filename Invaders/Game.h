@@ -2,13 +2,11 @@
 
 #include "Task.h"
 #include "smart_ptr.h"
+#include "Phase.h"
 #include <string>
 
 PTR( Game );
-PTR( Writer );
-PTR( CharacterMgr );
-PTR( BulletMgr );
-PTR( Hecato );
+PTR( Phase );
 
 class Game : public Task {
 public:
@@ -19,12 +17,9 @@ public:
 	void initialize( );
 	void update( );
 private:
-	void updateobj( );
-	void drawobj( );
+	void changeScene( );
 private:
-	WriterPtr _drawer;
-	CharacterMgrPtr _characterMgr;
-	BulletMgrPtr _bulletMgr;
-	HecatoPtr _hecato;
+	PhasePtr _phase;
+	Phase::NEXT _next;
 };
 

@@ -1,5 +1,7 @@
 #include "Hecato.h"
+#include "Character.h"
 #include "CharacterMgr.h"
+#include "Bullet.h"
 #include "BulletMgr.h"
 
 Hecato::Hecato( ) {
@@ -13,27 +15,20 @@ void Hecato::update( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 	landing( char_mgr, blt_mgr );
 }
 
-void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {/*
+void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 	int num = blt_mgr->getDeadBulletNum( );
 	if ( num < 0 ) {
 		return;
 	}
-
-	CharacterPtr chara = char_mgr->getPlayer( );
-	if ( chara->isShooting( ) ) {
-		chara->setShooting( false );
-		blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ) - CHARA_HEIGHT * RATIO );
-		return;
-	}
 	
 	for ( int i = 0; i < char_mgr->getEnemySize( ) - 1; i++ ) {
-		chara = char_mgr->getEnemys( i );
+		CharacterPtr chara = char_mgr->getEnemys( i );
 		if ( chara->isShooting( ) ) {
 			chara->setShooting( false );
 			blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ) - CHARA_HEIGHT * RATIO, true );
 			return;
 		}
-	}*/
+	}
 }
 
 void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {

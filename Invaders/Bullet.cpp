@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "Defin.h"
+#include "Drawer.h"
 
 static const int BULLET_SPEED = 100;
 
@@ -23,11 +24,12 @@ void Bullet::update( ) {
 	}
 }
 
-void Bullet::draw( WriterConstPtr drawer ) {
-	int x = _ratio_x / RATIO;
-	int y = _ratio_y / RATIO;
+void Bullet::draw( ) {
+	DrawerPtr drawer = Drawer::getTask( );
+	int sx = _ratio_x / RATIO;
+	int sy = _ratio_y / RATIO;
 
-	drawer->draw( GRAPHIC_BULLET, x - BULLET_WIDTH / 2, y - BULLET_HEIGHT, _dir_down );
+	drawer->setSprite( Drawer::Sprite( Drawer::Transform( sx - BULLET_WIDTH / 2, sy - BULLET_HEIGHT ), GRAPHIC_BULLET ) );
 }
 
 void Bullet::hit( ) {

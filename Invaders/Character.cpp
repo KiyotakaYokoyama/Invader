@@ -19,19 +19,19 @@ void Character::update( std::list< CharacterPtr > enemys ) {
 	moveVertical( );
 }
 
-void Character::draw( WriterConstPtr drawer ) {
+void Character::draw( ) {
+	DrawerPtr drawer = Drawer::getTask( );
 	int sx = _ratio_x / RATIO;
 	int sy = _ratio_y / RATIO;
 
-	drawer->draw( _graph, sx - CHARA_WIDTH / 2, sy - CHARA_HEIGHT );
+	drawer->setSprite( Drawer::Sprite( Drawer::Transform( sx - CHARA_WIDTH / 2, sy - CHARA_HEIGHT ), _graph ) );
+	
+	//drawer->drawString( sx, sy, "'" );
 
-	DrawerPtr draw = Drawer::getTask( );
-	draw->drawString( sx, sy, "'" );
-
-	draw->drawString( sx-CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„¬" );
-	draw->drawString( sx-CHARA_WIDTH/2, sy, "„¯" );
-	draw->drawString( sx+CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„­" );
-	draw->drawString( sx+CHARA_WIDTH/2, sy, "„®" );
+	//drawer->drawString( sx-CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„¬" );
+	//drawer->drawString( sx-CHARA_WIDTH/2, sy, "„¯" );
+	//drawer->drawString( sx+CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„­" );
+	//drawer->drawString( sx+CHARA_WIDTH/2, sy, "„®" );
 
 }
 
@@ -64,7 +64,7 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 		hitLeft( );
 		return;
 	}
-//	hitEnemy( enemys );
+	hitEnemy( enemys );
 	
 	_ratio_x += _move_speed;
 }

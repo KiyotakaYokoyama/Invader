@@ -97,8 +97,11 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Hecato.h" />
+    <ClInclude Include="Phase.h" />
+    <ClInclude Include="PhaseResult.h" />
+    <ClInclude Include="PhaseStage.h" />
+    <ClInclude Include="PhaseTitle.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Writer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
@@ -109,8 +112,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Hecato.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Phase.cpp" />
+    <ClCompile Include="PhaseResult.cpp" />
+    <ClCompile Include="PhaseStage.cpp" />
+    <ClCompile Include="PhaseTitle.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Writer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
