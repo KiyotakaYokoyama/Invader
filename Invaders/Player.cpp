@@ -53,6 +53,10 @@ void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
 	}
 }
 
+void Player::setDead( bool dead ) {
+	_dead = dead;
+}
+
 bool Player::isDead( ) {
 	return _dead;
 }

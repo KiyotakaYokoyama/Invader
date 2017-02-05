@@ -9,6 +9,7 @@ class Player : public  Character {
 public:
 	Player( int x, int y );
 	virtual ~Player( );
+	void setDead( bool dead );
 	bool isDead( );
 private:
 	void actionMove( );

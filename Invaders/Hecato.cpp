@@ -1,4 +1,5 @@
 #include "Hecato.h"
+#include "Player.h"
 #include "Character.h"
 #include "CharacterMgr.h"
 #include "Bullet.h"
@@ -10,22 +11,29 @@ Hecato::Hecato( ) {
 Hecato::~Hecato( ) {
 }
 
-void Hecato::update( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
-	shot( char_mgr, blt_mgr );
+void Hecato::update( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
+	shot( player, char_mgr, blt_mgr );
 	landing( char_mgr, blt_mgr );
+	landing( player, blt_mgr );
 }
 
-void Hecato::shot( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
+void Hecato::shot( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 	int num = blt_mgr->getDeadBulletNum( );
 	if ( num < 0 ) {
 		return;
 	}
-	
-	for ( int i = 0; i < char_mgr->getEnemySize( ) - 1; i++ ) {
+
+	if ( player->isShooting( ) ) {
+		player->setShooting( false );
+		blt_mgr->shotBullet( num, player->getRatioX( ), player->getRatioY( ) - CHARA_HEIGHT * RATIO );
+		return;
+	}
+
+	for ( int i = 0; i < char_mgr->getEnemySize( ); i++ ) {
 		CharacterPtr chara = char_mgr->getEnemys( i );
 		if ( chara->isShooting( ) ) {
 			chara->setShooting( false );
-			blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ) - CHARA_HEIGHT * RATIO, true );
+			blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ), true );
 			return;
 		}
 	}
@@ -55,6 +63,25 @@ void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 		bullet_ite++;
 	}
 }
+
+void Hecato::landing( PlayerPtr player, BulletMgrPtr blt_mgr ) {
+	std::list< BulletPtr > bullet_list = blt_mgr->getBullets( );
+	std::list< BulletPtr >::iterator ite = bullet_list.begin( );
+
+	while ( ite != bullet_list.end( ) ) {
+		int bullet_x = (*ite)->getRatioX( );
+		int bullet_y = (*ite)->getRatioY( );
+		if ( isOverlapped( player, bullet_x + BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
+			 isOverlapped( player, bullet_x + BULLET_WIDTH / 2, bullet_y				   ) ||
+			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
+			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
+			player->setDead( true );
+			(*ite)->hit( );
+		}
+		ite++;
+	}
+}
+
 
 bool Hecato::isOverlapped( CharacterPtr target, int x, int y ) {
 	int tx1 = target->getRatioX( ) - ( CHARA_WIDTH * RATIO / 2 );

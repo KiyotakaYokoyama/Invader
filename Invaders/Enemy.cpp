@@ -16,7 +16,6 @@ void Enemy::actionMove( ) {
 }
 
 void Enemy::actionShoot( ) {
-	_count++;
 	setShooting( false );
 
 	if ( rand( ) % PROBABILITY_RATIO < PROBABILITY ) {
@@ -25,7 +24,7 @@ void Enemy::actionShoot( ) {
 }
 
 void Enemy::toApproach( ) {
-	const int APPROACH_LENGH = 50 * RATIO;
+	const int APPROACH_LENGH = 10 * RATIO;
 	setRatioY( getRatioY( ) + APPROACH_LENGH );
 }
 

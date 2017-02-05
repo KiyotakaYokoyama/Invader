@@ -51,7 +51,7 @@ void PhaseStage::act( ) {
 	_characterMgr->update( );
 	_player->update( _characterMgr->getEnemys( ) );
 	_bulletMgr->update( );
-	_hecato->update( _characterMgr, _bulletMgr );
+	_hecato->update( _player, _characterMgr, _bulletMgr );
 }
 
 void PhaseStage::wait( ) {
