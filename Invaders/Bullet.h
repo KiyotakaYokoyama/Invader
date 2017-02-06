@@ -10,6 +10,7 @@ public:
 	void hit( );
 	int getRatioX( ) const;
 	int getRatioY( ) const;
+	bool dirDown( ) const;
 	bool isDead( );
 private:
 	int _ratio_x;

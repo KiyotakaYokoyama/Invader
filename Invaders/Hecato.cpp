@@ -55,8 +55,10 @@ void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
 				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
 				//キャラクターに当てる
-				(*enemy_ite)->hitBullet( );
-				(*bullet_ite)->hit( );
+				if ( !(*bullet_ite)->dirDown( ) ) {
+					(*enemy_ite)->hitBullet( );
+					(*bullet_ite)->hit( );
+				}
 			}
 			enemy_ite++;
 		}

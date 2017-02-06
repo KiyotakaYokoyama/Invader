@@ -45,6 +45,10 @@ int Bullet::getRatioY( ) const {
 	return _ratio_y;
 }
 
+bool Bullet::dirDown( ) const {
+	return _dir_down;
+}
+
 bool Bullet::isDead( ) {
 	bool result = false;
 
