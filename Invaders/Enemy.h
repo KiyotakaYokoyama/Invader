@@ -9,12 +9,13 @@ class Enemy : public Character {
 public:
 	Enemy( int x, int y );
 	virtual ~Enemy( );
-	void initEnemy( int x, int y );
+	void toApproach( );
 private:
+	void action( );
 	void actionMove( );
 	void actionShoot( );
-	void toApproach( );
-	void hitLeft( );
-	void hitRight( );
+	void hitBullet( );
 	void hitEnemy( std::list< CharacterPtr > enemys );
+private:
+	int _move_speed;
 };

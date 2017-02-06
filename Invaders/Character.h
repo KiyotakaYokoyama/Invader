@@ -13,26 +13,22 @@ public:
 	void update( std::list< CharacterPtr > enemys );
 	void draw( );
 	void setShooting( bool shoot );
-	void hit( );
-	bool isShooting( );
-	int getRatioX( );
-	int getRatioY( );
-	GRAPHIC getGraphic( );
-	virtual void initEnemy( int x, int y );
-	virtual void hitLeft( );
-	virtual void hitRight( );
+	bool isShooting( ) const;
+	int getRatioX( ) const;
+	int getRatioY( ) const;
+	int getMoveSpeed( ) const;
+	GRAPHIC getGraphic( ) const;
+	virtual void hitBullet( ) { };
+	virtual void toApproach( ) { };
 protected:
 	void setMoveSpeed( int move_speed );
 	void setRatioX( int ratio_x );
 	void setRatioY( int ratio_y );
-	int getMoveSpeed( );
 	bool isOverlapped( CharacterPtr target, int x, int y );
 private:
-	void action( );
 	void moveVertical( );
-	virtual void moveHorizontal( std::list< CharacterPtr > enemys );
-	virtual void actionMove( );
-	virtual void actionShoot( );
+	void moveHorizontal( std::list< CharacterPtr > enemys );
+	virtual void action( ) = 0;
 	virtual void hitEnemy( std::list< CharacterPtr > enemys ) = 0;
 private:
 	int _ratio_x;

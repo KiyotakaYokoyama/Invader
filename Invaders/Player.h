@@ -12,6 +12,7 @@ public:
 	void setDead( bool dead );
 	bool isDead( );
 private:
+	void action( );
 	void actionMove( );
 	void actionShoot( );
 	void hitEnemy( std::list< CharacterPtr > enemys );

@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Defin.h"
 #include "Keyboard.h"
+#include "Device.h"
 
 static const int MAX_SHOOT_COUNT = 4;
 static const int GAMEOVER_LINE = 400;
@@ -11,6 +12,11 @@ _dead( false ) {
 }
 
 Player::~Player( ) {
+}
+
+void Player::action( ) {
+	actionMove( );
+	actionShoot( );
 }
 
 void Player::actionMove( ) {
@@ -32,8 +38,9 @@ void Player::actionShoot( ) {
 	}
 
 	KeyboardPtr keyboard = Keyboard::getTask( );
+	DevicePtr device = Device::getTask( );
 
-	if ( keyboard->isHoldKey( "B" ) ) {
+	if ( device->getButton( ) == BUTTON_A ) {
 		_shoot_count = 0;
 		setShooting( true );
 	}

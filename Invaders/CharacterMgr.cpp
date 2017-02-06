@@ -3,10 +3,10 @@
 #include "Enemy.h"
 #include "defin.h"
 
-const int MAX_ENEMY_WEDTH_NUM = 1;
-const int MAX_ENEMY_HEIGHT_NUM = 1;
+const int MAX_ENEMY_WEDTH_NUM = 2;
+const int MAX_ENEMY_HEIGHT_NUM = 2;
 
-CharacterMgr::CharacterMgr( ) {	
+CharacterMgr::CharacterMgr( ) {
 	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
 		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
 			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
@@ -21,6 +21,14 @@ CharacterMgr::~CharacterMgr( ) {
 
 void CharacterMgr::update( ) {
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
+	if ( outofScreen( ) ) {
+		while ( ite != _enemys.end( ) ) {
+			(*ite)->toApproach( );
+			ite++;
+		}
+		ite = _enemys.begin( );
+	}
+
 	while ( ite != _enemys.end( ) ) {
 		(*ite)->update( _enemys );
 		ite++;
@@ -32,15 +40,6 @@ void CharacterMgr::draw( ) {
 	while ( ite != _enemys.end( ) ) {
 		(*ite)->draw( );
 		ite++;
-	}
-}
-
-void CharacterMgr::initEnemys( ) {
-	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
-	for ( unsigned int i = 0; i < _enemys.size( ); i++ ) {
-		int pos_x = ( ( ( i / MAX_ENEMY_WEDTH_NUM ) * CHARA_WIDTH ) + CHARA_WIDTH / 2 ) * RATIO;
-		int pos_y = ( ( ( i % MAX_ENEMY_HEIGHT_NUM ) * CHARA_HEIGHT ) + CHARA_HEIGHT ) * RATIO;
-		(*ite)->initEnemy( pos_x, pos_y );
 	}
 }
 
@@ -60,5 +59,29 @@ CharacterPtr CharacterMgr::getEnemys( int idx ) {
 		result = (*ite);
 	}
 	
+	return result;
+}
+
+bool CharacterMgr::outofScreen( ) {
+	bool result = false;
+
+	auto ite = _enemys.begin( );
+	while( ite != _enemys.end( ) ) {
+		if ( (*ite)->getRatioY( ) < -50 ) {
+			ite++;
+			continue;
+		}
+
+		int ratio_x = (*ite)->getRatioX( ) + (*ite)->getMoveSpeed( );
+		int screen_r = ( SCREEN_WIDTH - CHARA_WIDTH / 2 ) * RATIO;
+		int screen_l = ( CHARA_WIDTH / 2 ) * RATIO;
+
+		if ( ratio_x < screen_l || ratio_x > screen_r ) {
+			result = true;
+			break;
+		}
+		ite++;
+	}
+
 	return result;
 }

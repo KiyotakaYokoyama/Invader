@@ -32,24 +32,6 @@ void Character::draw( ) {
 	//drawer->drawString( sx-CHARA_WIDTH/2, sy, "„¯" );
 	//drawer->drawString( sx+CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„­" );
 	//drawer->drawString( sx+CHARA_WIDTH/2, sy, "„®" );
-
-}
-
-void Character::action( ) {
-	actionMove( );
-	actionShoot( );
-}
-
-void Character::actionMove( ) {
-}
-
-void Character::actionShoot( ) {
-}
-
-void Character::hitLeft( ) {
-}
-
-void Character::hitRight( ) {
 }
 
 void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
@@ -57,11 +39,7 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 	int screen_r = ( SCREEN_WIDTH - CHARA_WIDTH / 2 ) * RATIO;
 	int screen_l = ( CHARA_WIDTH / 2 ) * RATIO;
 
-	if ( ratio_x > screen_r ) {
-		hitRight( );
-		return;
-	} else if( ratio_x < screen_l ) {
-		hitLeft( );
+	if ( ratio_x > screen_r || ratio_x < screen_l ) {
 		return;
 	}
 	hitEnemy( enemys );
@@ -80,11 +58,6 @@ bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
 void Character::moveVertical( ) {
 }
 
-void Character::hit( ) {	
-	_ratio_x = -100;
-	_ratio_y = -100;
-}
-
 void Character::setMoveSpeed( int move_speed ) {
 	_move_speed = move_speed;
 }
@@ -101,25 +74,18 @@ void Character::setShooting( bool shoot ) {
 	_shooting = shoot;
 }
 
-void Character::initEnemy( int x, int y ) {
-}
-
-int Character::getMoveSpeed( ) {
+int Character::getMoveSpeed( ) const {
 	return _move_speed;
 }
 
-int Character::getRatioX( ) {
+int Character::getRatioX( ) const {
 	return _ratio_x;
 }
 
-int Character::getRatioY( ) {
+int Character::getRatioY( ) const {
 	return _ratio_y;
 }
 
-bool Character::isShooting( ) {
+bool Character::isShooting( ) const {
 	return _shooting;
-}
-
-GRAPHIC Character::getGraphic( ) {
-	return _graph;
 }
