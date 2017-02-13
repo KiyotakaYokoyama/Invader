@@ -17,15 +17,11 @@ void Hecato::update( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr bl
 	landing( player, blt_mgr );
 }
 
-void Hecato::shot( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
-	int num = blt_mgr->getDeadBulletNum( );
-	if ( num < 0 ) {
-		return;
-	}
+void Hecato::shot( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {/*
 
 	if ( player->isShooting( ) ) {
 		player->setShooting( false );
-		blt_mgr->shotBullet( num, player->getRatioX( ), player->getRatioY( ) - CHARA_HEIGHT * RATIO - 30 );
+		blt_mgr->shotBullet( player->getRatioX( ), player->getRatioY( ) - CHARA_HEIGHT * RATIO - 30 );
 		return;
 	}
 
@@ -33,10 +29,10 @@ void Hecato::shot( PlayerPtr player, CharacterMgrPtr char_mgr, BulletMgrPtr blt_
 		CharacterPtr chara = char_mgr->getEnemys( i );
 		if ( chara->isShooting( ) ) {
 			chara->setShooting( false );
-			blt_mgr->shotBullet( num, chara->getRatioX( ), chara->getRatioY( ), true );
+			blt_mgr->shotBullet( chara->getRatioX( ), chara->getRatioY( ), true );
 			return;
 		}
-	}
+	}*/
 }
 
 void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
@@ -57,7 +53,7 @@ void Hecato::landing( CharacterMgrPtr char_mgr, BulletMgrPtr blt_mgr ) {
 				//キャラクターに当てる
 				if ( !(*bullet_ite)->dirDown( ) ) {
 					(*enemy_ite)->hitBullet( );
-					(*bullet_ite)->hit( );
+				//	(*bullet_ite)->hit( );
 				}
 			}
 			enemy_ite++;
@@ -79,7 +75,7 @@ void Hecato::landing( PlayerPtr player, BulletMgrPtr blt_mgr ) {
 			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
 			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
 			player->setDead( true );
-			(*ite)->hit( );
+		//	(*ite)->hit( );
 		}
 		ite++;
 	}

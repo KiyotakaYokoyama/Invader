@@ -1,13 +1,17 @@
 #include "Player.h"
+#include "Bullet.h"
+#include "BulletMgr.h"
 #include "Defin.h"
 #include "Keyboard.h"
-#include "Device.h"
 
 static const int MAX_SHOOT_COUNT = 4;
 static const int GAMEOVER_LINE = 400;
 
-Player::Player( int x, int y ) :
-Character( GRAPHIC_PLAYER, x, y ) {
+PTR( Bullet );
+
+Player::Player( int x, int y, BulletMgrPtr bullet_mgr ) :
+Character( GRAPHIC_PLAYER, x, y ),
+_bullet_mgr( bullet_mgr ) {
 }
 
 Player::~Player( ) {
@@ -37,11 +41,10 @@ void Player::actionShoot( ) {
 	}
 
 	KeyboardPtr keyboard = Keyboard::getTask( );
-	DevicePtr device = Device::getTask( );
 
-	if ( device->getButton( ) == BUTTON_A ) {
+	if ( keyboard->isHoldKey( "Z" ) ) {
 		_shoot_count = 0;
-		setShooting( true );
+		_bullet_mgr->shot( BulletPtr( new Bullet( getRatioX( ), getRatioY( ), false ) ) );
 	}
 }
 

@@ -4,16 +4,13 @@
 
 static const int BULLET_SPEED = 100;
 
-Bullet::Bullet( int x, int y ) {
+Bullet::Bullet( int x, int y, bool dir_down ) :
+_ratio_x( x ),
+_ratio_y( y ),
+_dir_down( dir_down ) {
 }
 
 Bullet::~Bullet( ) {
-}
-
-void Bullet::initBullet( int x, int y, bool dir_down ) {
-	_ratio_x = x;
-	_ratio_y = y;
-	_dir_down = dir_down;
 }
 
 void Bullet::update( ) {
@@ -32,11 +29,6 @@ void Bullet::draw( ) {
 	drawer->setSprite( Drawer::Sprite( Drawer::Transform( sx - BULLET_WIDTH / 2, sy - BULLET_HEIGHT ), GRAPHIC_BULLET ) );
 }
 
-void Bullet::hit( ) {
-	_ratio_x = -100;
-	_ratio_y = -100;
-}
-
 int Bullet::getRatioX( ) const {
 	return _ratio_x;
 }
@@ -49,15 +41,11 @@ bool Bullet::dirDown( ) const {
 	return _dir_down;
 }
 
-bool Bullet::isDead( ) {
+bool Bullet::outofScreen( ) const {
 	bool result = false;
-
 	if ( _ratio_x < 0 || _ratio_x > SCREEN_WIDTH * RATIO ||
-		 _ratio_y < 0 || _ratio_y > SCREEN_HEIGHT * RATIO ) {
-		_ratio_x = -100;
-		_ratio_y = -100;
+        _ratio_y < 0 || _ratio_y > SCREEN_HEIGHT * RATIO ) {
 		result = true;
 	}
-
 	return result;
 }

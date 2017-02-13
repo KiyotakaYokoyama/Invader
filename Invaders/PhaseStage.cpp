@@ -17,10 +17,9 @@ _state( STATE_NORMAL ) {
 	drawer->loadGraph( GRAPHIC_ENEMY, "stage/enemy.png" );
 	drawer->loadGraph( GRAPHIC_BULLET, "stage/bullet.png" );
 
-	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y ) );
-	_characterMgr = CharacterMgrPtr( new CharacterMgr );
-	_bulletMgr = BulletMgrPtr( new BulletMgr );
-	_hecato = HecatoPtr( new Hecato );
+	_bullet_mgr = BulletMgrPtr( new BulletMgr );
+	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y, _bullet_mgr ) );
+	_character_mgr = CharacterMgrPtr( new CharacterMgr );
 }
 
 PhaseStage::~PhaseStage( ) {
@@ -48,10 +47,9 @@ Phase::NEXT PhaseStage::update( ) {
 }
 
 void PhaseStage::act( ) {
-	_characterMgr->update( );
-	_player->update( _characterMgr->getEnemys( ) );
-	_bulletMgr->update( );
-	_hecato->update( _player, _characterMgr, _bulletMgr );
+	_character_mgr->update( );
+	_player->update( _character_mgr->getEnemys( ) );
+	_bullet_mgr->update( _player, _character_mgr );
 }
 
 void PhaseStage::wait( ) {
@@ -59,7 +57,16 @@ void PhaseStage::wait( ) {
 }
 
 void PhaseStage::draw( ) {
-	_characterMgr->draw( );
+	_character_mgr->draw( );
 	_player->draw( );
-	_bulletMgr->draw( );
+	_bullet_mgr->draw( );
+
+#if _DEBUG
+	debugDraw( );
+#endif
+}
+
+void PhaseStage::debugDraw( ) {
+	DrawerPtr drawer = Drawer::getTask( );
+	drawer->drawString( 10, 10, "bulletsize %d", _bullet_mgr->getBullets( ).size( ) );
 }

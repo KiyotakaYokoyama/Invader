@@ -6,7 +6,6 @@
 PTR( Player );
 PTR( CharacterMgr );
 PTR( BulletMgr );
-PTR( Hecato );
 
 class PhaseStage : public Phase {
 public:
@@ -22,11 +21,11 @@ private:
 	void act( );
 	void wait( );
 	void draw( );
+	void debugDraw( );
 private:
 	int _wait_count;
 	STATE _state;
 	PlayerPtr _player;
-	CharacterMgrPtr _characterMgr;
-	BulletMgrPtr _bulletMgr;
-	HecatoPtr _hecato;
+	CharacterMgrPtr _character_mgr;
+	BulletMgrPtr _bullet_mgr;
 };

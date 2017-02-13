@@ -2,16 +2,14 @@
 
 class Bullet {
 public:
-	Bullet( int x, int y );
+	Bullet( int x, int y, bool dir_down );
 	virtual ~Bullet( );
-	void initBullet( int x, int y, bool dir_down = false );
 	void update( );
 	void draw( );
-	void hit( );
 	int getRatioX( ) const;
 	int getRatioY( ) const;
 	bool dirDown( ) const;
-	bool isDead( );
+	bool outofScreen( ) const;
 private:
 	int _ratio_x;
 	int _ratio_y;
