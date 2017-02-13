@@ -38,7 +38,5 @@ void Enemy::toApproach( ) {
 }
 
 void Enemy::hitBullet( ) {
-	setRatioX( -100 );
-	setRatioY( -100 );
 	setDead( true );
 }

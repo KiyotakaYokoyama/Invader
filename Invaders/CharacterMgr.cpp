@@ -6,14 +6,9 @@
 const int MAX_ENEMY_WEDTH_NUM = 2;
 const int MAX_ENEMY_HEIGHT_NUM = 2;
 
-CharacterMgr::CharacterMgr( BulletMgrPtr bullet_mgr ) {
-	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
-		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
-			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
-			int pos_y = ( j * CHARA_HEIGHT + CHARA_HEIGHT ) * RATIO;
-			_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y, bullet_mgr ) ) );
-		}
-	}
+CharacterMgr::CharacterMgr( BulletMgrPtr bullet_mgr ) :
+_bullet_mgr( bullet_mgr ) {
+	initEnemys( );
 }
 
 CharacterMgr::~CharacterMgr( ) {
@@ -44,10 +39,13 @@ void CharacterMgr::update( ) {
 	}
 
 	while ( ite != _enemys.end( ) ) {
-		if ( !(*ite)->isDead( ) ) {
+		if ( (*ite)->isDead( ) ) {
+			ite = _enemys.erase( ite );
+			if ( ite == _enemys.end( ) ) break;
+		} else {
 			(*ite)->update( _enemys );
+			ite++;
 		}
-		ite++;
 	}
 }
 
@@ -79,13 +77,11 @@ CharacterPtr CharacterMgr::getEnemys( int idx ) {
 }
 
 void CharacterMgr::initEnemys( ) {
-	auto ite = _enemys.begin( );
 	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
 		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
 			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
 			int pos_y = ( j * CHARA_HEIGHT + CHARA_HEIGHT ) * RATIO;
-			(*ite)->initPos( pos_x, pos_y );
-			ite++;
+			_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y, _bullet_mgr ) ) );
 		}
 	}
 }
@@ -95,12 +91,6 @@ bool CharacterMgr::outofScreen( ) {
 
 	auto ite = _enemys.begin( );
 	while( ite != _enemys.end( ) ) {
-		if ( (*ite)->getRatioY( ) < -50 ) {
-			(*ite)->setDead( true );
-			ite++;
-			continue;
-		}
-
 		int ratio_x = (*ite)->getRatioX( ) + (*ite)->getMoveSpeed( );
 		int screen_r = ( SCREEN_WIDTH - CHARA_WIDTH / 2 ) * RATIO;
 		int screen_l = ( CHARA_WIDTH / 2 ) * RATIO;

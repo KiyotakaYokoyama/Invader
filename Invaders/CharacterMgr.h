@@ -20,5 +20,6 @@ private:
 	void initEnemys( );
 	bool outofScreen( );
 private:
+	BulletMgrPtr _bullet_mgr;
 	std::list< CharacterPtr > _enemys;
 };

@@ -71,7 +71,7 @@ void BulletMgr::landing( CharacterMgrPtr char_mgr ) {
 			enemy_ite++;
 		}
 
-		if ( _bullets.empty( ) ) {
+		if ( ite == _bullets.end( ) || _bullets.empty( ) ) {
 			break;
 		}
 

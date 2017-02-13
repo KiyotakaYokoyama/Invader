@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "CharacterMgr.h"
 #include "BulletMgr.h"
-#include "Hecato.h"
 #include "defin.h"
 #include "Drawer.h"
 
