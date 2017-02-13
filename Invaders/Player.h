@@ -9,8 +9,6 @@ class Player : public  Character {
 public:
 	Player( int x, int y );
 	virtual ~Player( );
-	void setDead( bool dead );
-	bool isDead( );
 private:
 	void action( );
 	void actionMove( );
@@ -18,5 +16,4 @@ private:
 	void hitEnemy( std::list< CharacterPtr > enemys );
 private:
 	int _shoot_count;
-	bool _dead;
 };

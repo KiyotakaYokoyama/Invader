@@ -7,8 +7,7 @@ static const int MAX_SHOOT_COUNT = 4;
 static const int GAMEOVER_LINE = 400;
 
 Player::Player( int x, int y ) :
-Character( GRAPHIC_PLAYER, x, y ),
-_dead( false ) {
+Character( GRAPHIC_PLAYER, x, y ) {
 }
 
 Player::~Player( ) {
@@ -54,16 +53,8 @@ void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
 			continue;
 		}
 		if ( (*ite)->getRatioY( ) > GAMEOVER_LINE * RATIO ) {
-			_dead = true;
+			setDead( true );
 		}
 		ite++;
 	}
-}
-
-void Player::setDead( bool dead ) {
-	_dead = dead;
-}
-
-bool Player::isDead( ) {
-	return _dead;
 }

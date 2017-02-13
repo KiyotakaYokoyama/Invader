@@ -12,11 +12,14 @@ public:
 	virtual ~Character( );
 	void update( std::list< CharacterPtr > enemys );
 	void draw( );
+	void initPos( int x, int y );
 	void setShooting( bool shoot );
+	void setDead( bool dead );
 	bool isShooting( ) const;
 	int getRatioX( ) const;
 	int getRatioY( ) const;
 	int getMoveSpeed( ) const;
+	bool isDead( ) const;
 	GRAPHIC getGraphic( ) const;
 	virtual void hitBullet( ) { };
 	virtual void toApproach( ) { };
@@ -35,5 +38,6 @@ private:
 	int _ratio_y;
 	int _move_speed;
 	bool _shooting;
+	bool _dead;
 	GRAPHIC _graph;
 };

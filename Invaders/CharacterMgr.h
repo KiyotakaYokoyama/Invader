@@ -16,6 +16,7 @@ public:
 	std::list<CharacterPtr> getEnemys( ) const;
 	CharacterPtr getEnemys( int idx );
 private:
+	void initEnemys( );
 	bool outofScreen( );
 private:
 	std::list< CharacterPtr > _enemys;

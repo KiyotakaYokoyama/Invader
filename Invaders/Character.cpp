@@ -4,7 +4,8 @@
 #include "Defin.h"
 #include "Drawer.h"
 
-Character::Character( GRAPHIC graph, int x, int y ) {
+Character::Character( GRAPHIC graph, int x, int y ) :
+_dead( false ) {
 	_graph = graph;
 	_ratio_x = x;
 	_ratio_y = y;
@@ -58,6 +59,12 @@ bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
 void Character::moveVertical( ) {
 }
 
+void Character::initPos( int x, int y ) {
+	_ratio_x = x;
+	_ratio_y = y;
+	_dead = false;
+}
+
 void Character::setMoveSpeed( int move_speed ) {
 	_move_speed = move_speed;
 }
@@ -74,6 +81,10 @@ void Character::setShooting( bool shoot ) {
 	_shooting = shoot;
 }
 
+void Character::setDead( bool dead ) {
+	_dead = dead;
+}
+
 int Character::getMoveSpeed( ) const {
 	return _move_speed;
 }
@@ -88,4 +99,8 @@ int Character::getRatioY( ) const {
 
 bool Character::isShooting( ) const {
 	return _shooting;
+}
+
+bool Character::isDead( ) const {
+	return _dead;
 }

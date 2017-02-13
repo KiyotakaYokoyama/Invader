@@ -1,8 +1,7 @@
 #include "Enemy.h"
 #include "Defin.h"
 
-static const int PROBABILITY_RATIO = 1000;
-static const int PROBABILITY = 5;
+static const int PROBABILITY = 1000;
 
 Enemy::Enemy( int x, int y ) :
 Character( GRAPHIC_ENEMY, x, y ),
@@ -24,7 +23,7 @@ void Enemy::actionMove( ) {
 void Enemy::actionShoot( ) {
 	setShooting( false );
 
-	if ( rand( ) % PROBABILITY_RATIO < PROBABILITY ) {
+	if ( rand( ) % PROBABILITY == 0  ) {
 		setShooting( true );
 	}
 }
@@ -65,4 +64,5 @@ void Enemy::hitEnemy( std::list< CharacterPtr > enemys ) {
 void Enemy::hitBullet( ) {
 	setRatioX( -100 );
 	setRatioY( -100 );
+	setDead( true );
 }
