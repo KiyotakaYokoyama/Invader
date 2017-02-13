@@ -1,11 +1,14 @@
 #include "Enemy.h"
 #include "Defin.h"
+#include "Bullet.h"
+#include "BulletMgr.h"
 
 static const int PROBABILITY = 1000;
 
-Enemy::Enemy( int x, int y ) :
+Enemy::Enemy( int x, int y, BulletMgrPtr bullet_mgr ) :
 Character( GRAPHIC_ENEMY, x, y ),
-_move_speed( MOVE_SPEED ) {
+_move_speed( MOVE_SPEED ),
+_bullet_mgr( bullet_mgr ) {
 	setMoveSpeed( _move_speed );
 }
 
@@ -21,10 +24,8 @@ void Enemy::actionMove( ) {
 }
 
 void Enemy::actionShoot( ) {
-	setShooting( false );
-
 	if ( rand( ) % PROBABILITY == 0  ) {
-		setShooting( true );
+		_bullet_mgr->shot( BulletPtr( new Bullet( getRatioX( ), getRatioY( ), true ) ) );
 	}
 }
 
@@ -34,31 +35,6 @@ void Enemy::toApproach( ) {
 
 	_move_speed *= -1;
 	setMoveSpeed( _move_speed );
-}
-
-void Enemy::hitEnemy( std::list< CharacterPtr > enemys ) {
-//	std::list< CharacterPtr >::iterator ite = enemys.begin( );
-//	while ( ite != enemys.end( ) ) {
-//		if ( (*ite) == shared_from_this( ) ) {
-//			ite++;
-//			continue;
-//		}
-//
-//		CharacterPtr target = (*ite);
-//		// âEÇ…Ç‘Ç¬Ç©Ç¡ÇΩ
-//		int ratio_x = getRatioX( ) + ( CHARA_WIDTH * RATIO / 2 );
-//		if ( isOverlapped( target, ratio_x, getRatioY( ) - ( CHARA_HEIGHT * RATIO ) ) ||
-//			 isOverlapped( target, ratio_x, getRatioY( ) ) ) {
-//			return;
-//		}
-//		// ç∂Ç…Ç‘Ç¬Ç©Ç¡ÇΩ
-//		ratio_x = getRatioX( ) - ( CHARA_WIDTH * RATIO / 2 );
-//		if ( isOverlapped( target, ratio_x, getRatioY( ) - ( CHARA_HEIGHT * RATIO ) ) ||
-//			 isOverlapped( target, ratio_x, getRatioY( ) ) ) {
-//			return;
-//		}
-//		ite++;
-//	}
 }
 
 void Enemy::hitBullet( ) {

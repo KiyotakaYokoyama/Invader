@@ -43,7 +43,6 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 	if ( ratio_x > screen_r || ratio_x < screen_l ) {
 		return;
 	}
-	hitEnemy( enemys );
 	
 	_ratio_x += _move_speed;
 }
@@ -76,11 +75,6 @@ void Character::setRatioX( int ratio_x ) {
 void Character::setRatioY( int ratio_y ) {
 	_ratio_y = ratio_y;
 }
-
-void Character::setShooting( bool shoot ) {
-	_shooting = shoot;
-}
-
 void Character::setDead( bool dead ) {
 	_dead = dead;
 }
@@ -95,10 +89,6 @@ int Character::getRatioX( ) const {
 
 int Character::getRatioY( ) const {
 	return _ratio_y;
-}
-
-bool Character::isShooting( ) const {
-	return _shooting;
 }
 
 bool Character::isDead( ) const {

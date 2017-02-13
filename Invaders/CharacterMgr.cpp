@@ -6,12 +6,12 @@
 const int MAX_ENEMY_WEDTH_NUM = 2;
 const int MAX_ENEMY_HEIGHT_NUM = 2;
 
-CharacterMgr::CharacterMgr( ) {
+CharacterMgr::CharacterMgr( BulletMgrPtr bullet_mgr ) {
 	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
 		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
 			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
 			int pos_y = ( j * CHARA_HEIGHT + CHARA_HEIGHT ) * RATIO;
-			_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y ) ) );
+			_enemys.push_back( CharacterPtr( new Enemy( pos_x, pos_y, bullet_mgr ) ) );
 		}
 	}
 }
@@ -44,7 +44,9 @@ void CharacterMgr::update( ) {
 	}
 
 	while ( ite != _enemys.end( ) ) {
-		(*ite)->update( _enemys );
+		if ( !(*ite)->isDead( ) ) {
+			(*ite)->update( _enemys );
+		}
 		ite++;
 	}
 }
@@ -94,6 +96,7 @@ bool CharacterMgr::outofScreen( ) {
 	auto ite = _enemys.begin( );
 	while( ite != _enemys.end( ) ) {
 		if ( (*ite)->getRatioY( ) < -50 ) {
+			(*ite)->setDead( true );
 			ite++;
 			continue;
 		}

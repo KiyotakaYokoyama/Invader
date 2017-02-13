@@ -19,7 +19,7 @@ _state( STATE_NORMAL ) {
 
 	_bullet_mgr = BulletMgrPtr( new BulletMgr );
 	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y, _bullet_mgr ) );
-	_character_mgr = CharacterMgrPtr( new CharacterMgr );
+	_character_mgr = CharacterMgrPtr( new CharacterMgr( _bullet_mgr ) );
 }
 
 PhaseStage::~PhaseStage( ) {

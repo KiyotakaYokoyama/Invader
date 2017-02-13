@@ -5,10 +5,11 @@
 #include <list>
 
 PTR( Character );
+PTR( BulletMgr );
 
 class CharacterMgr {
 public:
-	CharacterMgr( );
+	CharacterMgr( BulletMgrPtr bullet_mgr );
 	virtual ~CharacterMgr( );
 	void update( );
 	void draw( );

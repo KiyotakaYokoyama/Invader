@@ -34,7 +34,6 @@ void Player::actionMove( ) {
 }
 
 void Player::actionShoot( ) {
-	setShooting( false );
 	_shoot_count++;
 	if ( _shoot_count < MAX_SHOOT_COUNT ) {
 		return;
@@ -48,16 +47,16 @@ void Player::actionShoot( ) {
 	}
 }
 
-void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
-	std::list< CharacterPtr >::iterator ite = enemys.begin( );
-	while ( ite != enemys.end( ) ) {
-		if ( (*ite) == shared_from_this( ) ) {
-			ite++;
-			continue;
-		}
-		if ( (*ite)->getRatioY( ) > GAMEOVER_LINE * RATIO ) {
-			setDead( true );
-		}
-		ite++;
-	}
-}
+//void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
+//	std::list< CharacterPtr >::iterator ite = enemys.begin( );
+//	while ( ite != enemys.end( ) ) {
+//		if ( (*ite) == shared_from_this( ) ) {
+//			ite++;
+//			continue;
+//		}
+//		if ( (*ite)->getRatioY( ) > GAMEOVER_LINE * RATIO ) {
+//			setDead( true );
+//		}
+//		ite++;
+//	}
+//}

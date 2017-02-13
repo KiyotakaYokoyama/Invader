@@ -14,7 +14,6 @@ private:
 	void action( );
 	void actionMove( );
 	void actionShoot( );
-	void hitEnemy( std::list< CharacterPtr > enemys );
 private:
 	int _shoot_count;
 	BulletMgrPtr _bullet_mgr;
