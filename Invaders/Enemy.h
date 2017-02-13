@@ -13,8 +13,6 @@ public:
 	void toApproach( );
 private:
 	void action( );
-	void actionMove( );
-	void actionShoot( );
 	void hitBullet( );
 private:
 	int _move_speed;

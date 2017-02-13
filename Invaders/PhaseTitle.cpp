@@ -1,5 +1,5 @@
 #include "PhaseTitle.h"
-#include "Device.h"
+#include "Keyboard.h"
 #include "Drawer.h"
 #include "Defin.h"
 
@@ -13,9 +13,9 @@ PhaseTitle::~PhaseTitle( ) {
 }
 
 Phase::NEXT PhaseTitle::update( ) {
-	DevicePtr device = Device::getTask( );
+	KeyboardPtr keyboard = Keyboard::getTask( );
 
-	if ( device->getPush( ) != 0 ) {
+	if ( keyboard->isPushKey( "Z" ) ) {
 		return NEXT_STAGE;
 	}
 

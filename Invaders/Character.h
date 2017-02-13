@@ -12,7 +12,6 @@ public:
 	virtual ~Character( );
 	void update( std::list< CharacterPtr > enemys );
 	void draw( );
-	void initPos( int x, int y );
 	void setDead( bool dead );
 	int getRatioX( ) const;
 	int getRatioY( ) const;
@@ -24,7 +23,6 @@ protected:
 	void setMoveSpeed( int move_speed );
 	void setRatioX( int ratio_x );
 	void setRatioY( int ratio_y );
-	bool isOverlapped( CharacterPtr target, int x, int y );
 private:
 	void moveVertical( );
 	void moveHorizontal( std::list< CharacterPtr > enemys );

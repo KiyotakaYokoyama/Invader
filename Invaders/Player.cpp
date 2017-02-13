@@ -5,7 +5,6 @@
 #include "Keyboard.h"
 
 static const int MAX_SHOOT_COUNT = 4;
-static const int GAMEOVER_LINE = 400;
 
 PTR( Bullet );
 
@@ -43,20 +42,8 @@ void Player::actionShoot( ) {
 
 	if ( keyboard->isHoldKey( "Z" ) ) {
 		_shoot_count = 0;
-		_bullet_mgr->shot( BulletPtr( new Bullet( getRatioX( ), getRatioY( ), false ) ) );
+		int x = getRatioX( ) - BULLET_WIDTH * RATIO * 2 / 3;
+		int y = getRatioY( ) - CHARA_HEIGHT * RATIO * 7 / 10;
+		_bullet_mgr->shot( BulletPtr( new Bullet( x, y, false ) ) );
 	}
 }
-
-//void Player::hitEnemy( std::list< CharacterPtr > enemys ) {
-//	std::list< CharacterPtr >::iterator ite = enemys.begin( );
-//	while ( ite != enemys.end( ) ) {
-//		if ( (*ite) == shared_from_this( ) ) {
-//			ite++;
-//			continue;
-//		}
-//		if ( (*ite)->getRatioY( ) > GAMEOVER_LINE * RATIO ) {
-//			setDead( true );
-//		}
-//		ite++;
-//	}
-//}

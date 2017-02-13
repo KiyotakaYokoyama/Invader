@@ -7,18 +7,24 @@
 PTR( Character );
 PTR( BulletMgr );
 
-class CharacterMgr {
+class EnemyMgr {
 public:
-	CharacterMgr( BulletMgrPtr bullet_mgr );
-	virtual ~CharacterMgr( );
+	EnemyMgr( BulletMgrPtr bullet_mgr );
+	virtual ~EnemyMgr( );
 	void update( );
 	void draw( );
 	int getEnemySize( ) const;
 	std::list<CharacterPtr> getEnemys( ) const;
-	CharacterPtr getEnemys( int idx );
+private:
+	enum STATE {
+		STATE_INIT,
+		STATE_APPROACH,
+		STATE_NORMAL
+	};
 private:
 	void initEnemys( );
 	bool outofScreen( );
+	STATE checkState( );
 private:
 	BulletMgrPtr _bullet_mgr;
 	std::list< CharacterPtr > _enemys;

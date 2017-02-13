@@ -1,6 +1,6 @@
 #include "PhaseStage.h"
 #include "Player.h"
-#include "CharacterMgr.h"
+#include "EnemyMgr.h"
 #include "BulletMgr.h"
 #include "defin.h"
 #include "Drawer.h"
@@ -8,6 +8,7 @@
 static const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
 static const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 static const int WAIT_SCREEN_TIME = 60;
+static const int GAMEOVER_LINE = 400;
 
 PhaseStage::PhaseStage( ) :
 _state( STATE_NORMAL ) {
@@ -18,7 +19,7 @@ _state( STATE_NORMAL ) {
 
 	_bullet_mgr = BulletMgrPtr( new BulletMgr );
 	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y, _bullet_mgr ) );
-	_character_mgr = CharacterMgrPtr( new CharacterMgr( _bullet_mgr ) );
+	_enemy_mgr = EnemyMgrPtr( new EnemyMgr( _bullet_mgr ) );
 }
 
 PhaseStage::~PhaseStage( ) {
@@ -30,9 +31,7 @@ Phase::NEXT PhaseStage::update( ) {
 	switch( _state ) {
 	case STATE_NORMAL:
 		act( );
-		if ( _player->isDead( ) ) {
-			_state = STATE_WAIT;
-		}
+		gameover( );
 		break;
 	case STATE_WAIT:
 		wait( );
@@ -46,9 +45,26 @@ Phase::NEXT PhaseStage::update( ) {
 }
 
 void PhaseStage::act( ) {
-	_character_mgr->update( );
-	_player->update( _character_mgr->getEnemys( ) );
-	_bullet_mgr->update( _player, _character_mgr );
+	_enemy_mgr->update( );
+	_player->update( _enemy_mgr->getEnemys( ) );
+	_bullet_mgr->update( _player, _enemy_mgr );
+}
+
+void PhaseStage::gameover( ) {
+	auto enemys = _enemy_mgr->getEnemys( );
+	auto ite = enemys.begin( );
+
+	while( ite != enemys.end( ) ) {
+		if ( (*ite)->getRatioY( ) > GAMEOVER_LINE * RATIO ) {
+			_player->setDead( true );
+			break;
+		}
+		ite++;
+	}
+
+	if ( _player->isDead( ) ) {
+		_state = STATE_WAIT;
+	}
 }
 
 void PhaseStage::wait( ) {
@@ -56,7 +72,7 @@ void PhaseStage::wait( ) {
 }
 
 void PhaseStage::draw( ) {
-	_character_mgr->draw( );
+	_enemy_mgr->draw( );
 	_player->draw( );
 	_bullet_mgr->draw( );
 

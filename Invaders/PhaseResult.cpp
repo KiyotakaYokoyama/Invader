@@ -1,6 +1,6 @@
 #include "PhaseResult.h"
 #include "Drawer.h"
-#include "Device.h"
+#include "Keyboard.h"
 #include "defin.h"
 
 PhaseResult::PhaseResult( ) {
@@ -12,9 +12,9 @@ PhaseResult::~PhaseResult( ) {
 }
 
 Phase::NEXT PhaseResult::update( ) {
-	DevicePtr device = Device::getTask( );
+	KeyboardPtr keyboard = Keyboard::getTask( );
 	
-	if ( device->getPush( ) != 0 ) {
+	if ( keyboard->isPushKey( "Z" ) ) {
 		return NEXT_TITLE;
 	}
 	

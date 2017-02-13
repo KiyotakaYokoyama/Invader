@@ -5,10 +5,10 @@
 #include "Drawer.h"
 
 Character::Character( GRAPHIC graph, int x, int y ) :
+_ratio_x( x ),
+_ratio_y( y ),
+_graph( graph ),
 _dead( false ) {
-	_graph = graph;
-	_ratio_x = x;
-	_ratio_y = y;
 }
 
 Character::~Character( ) {
@@ -26,13 +26,6 @@ void Character::draw( ) {
 	int sy = _ratio_y / RATIO;
 
 	drawer->setSprite( Drawer::Sprite( Drawer::Transform( sx - CHARA_WIDTH / 2, sy - CHARA_HEIGHT ), _graph ) );
-	
-	//drawer->drawString( sx, sy, "'" );
-
-	//drawer->drawString( sx-CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„¬" );
-	//drawer->drawString( sx-CHARA_WIDTH/2, sy, "„¯" );
-	//drawer->drawString( sx+CHARA_WIDTH/2, sy-CHARA_HEIGHT, "„­" );
-	//drawer->drawString( sx+CHARA_WIDTH/2, sy, "„®" );
 }
 
 void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
@@ -47,21 +40,7 @@ void Character::moveHorizontal( std::list< CharacterPtr > enemys ) {
 	_ratio_x += _move_speed;
 }
 
-bool Character::isOverlapped( CharacterPtr target, int x, int y ) {
-	int tx1 = target->getRatioX( ) - ( CHARA_WIDTH * RATIO / 2 );
-	int tx2 = target->getRatioX( ) + ( CHARA_WIDTH * RATIO / 2 );
-	int ty1 = target->getRatioY( ) - ( CHARA_HEIGHT * RATIO );
-	int ty2 = target->getRatioY( );
-	return x >= tx1 && x <= tx2 && y >= ty1 && y <= ty2;
-}
-
 void Character::moveVertical( ) {
-}
-
-void Character::initPos( int x, int y ) {
-	_ratio_x = x;
-	_ratio_y = y;
-	_dead = false;
 }
 
 void Character::setMoveSpeed( int move_speed ) {

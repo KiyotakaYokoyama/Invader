@@ -1,7 +1,7 @@
 #include "BulletMgr.h"
 #include "Bullet.h"
 #include "Player.h"
-#include "CharacterMgr.h"
+#include "EnemyMgr.h"
 
 BulletMgr::BulletMgr( ) {
 }
@@ -9,7 +9,7 @@ BulletMgr::BulletMgr( ) {
 BulletMgr::~BulletMgr( ) {
 }
 
-void BulletMgr::update( PlayerPtr player, CharacterMgrPtr char_mgr ) {
+void BulletMgr::update( PlayerPtr player, EnemyMgrPtr char_mgr ) {
 	moveBullet( );
 	landing( player );
 	landing( char_mgr );
@@ -47,7 +47,7 @@ void BulletMgr::shot( BulletPtr bullet ) {
 	_bullets.push_back( bullet );
 }
 
-void BulletMgr::landing( CharacterMgrPtr char_mgr ) {
+void BulletMgr::landing( EnemyMgrPtr char_mgr ) {
 	//’e‚Æ‚Ì‚ ‚½‚è”»’è
 	std::list< CharacterPtr > enemy_list = char_mgr->getEnemys( );
 	std::list< CharacterPtr >::iterator enemy_ite = enemy_list.begin( );

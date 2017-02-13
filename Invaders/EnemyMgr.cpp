@@ -1,4 +1,4 @@
-#include "CharacterMgr.h"
+#include "EnemyMgr.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "defin.h"
@@ -6,50 +6,42 @@
 const int MAX_ENEMY_WEDTH_NUM = 2;
 const int MAX_ENEMY_HEIGHT_NUM = 2;
 
-CharacterMgr::CharacterMgr( BulletMgrPtr bullet_mgr ) :
+EnemyMgr::EnemyMgr( BulletMgrPtr bullet_mgr ) :
 _bullet_mgr( bullet_mgr ) {
 	initEnemys( );
 }
 
-CharacterMgr::~CharacterMgr( ) {
+EnemyMgr::~EnemyMgr( ) {
 }
 
-void CharacterMgr::update( ) {
+void EnemyMgr::update( ) {
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
-	unsigned int init = 0;
-	while ( ite != _enemys.end( ) ) {
-		if ( (*ite)->isDead( ) ) {
-			init++;
-		}
-		ite++;
-	}
-	if ( !( init < _enemys.size( ) ) ) {
+
+	switch( checkState( ) ) {
+	case STATE_INIT:
 		initEnemys( );
-		return;
-	}
-
-	ite = _enemys.begin( );
-
-	if ( outofScreen( ) ) {
+		break;
+	case STATE_APPROACH:
 		while ( ite != _enemys.end( ) ) {
 			(*ite)->toApproach( );
 			ite++;
 		}
-		ite = _enemys.begin( );
-	}
-
-	while ( ite != _enemys.end( ) ) {
-		if ( (*ite)->isDead( ) ) {
-			ite = _enemys.erase( ite );
-			if ( ite == _enemys.end( ) ) break;
-		} else {
-			(*ite)->update( _enemys );
-			ite++;
+		break;
+	case STATE_NORMAL:
+		while ( ite != _enemys.end( ) ) {
+			if ( (*ite)->isDead( ) ) {
+				ite = _enemys.erase( ite );
+				if ( ite == _enemys.end( ) ) break;
+			} else {
+				(*ite)->update( _enemys );
+				ite++;
+			}
 		}
+		break;
 	}
 }
 
-void CharacterMgr::draw( ) {
+void EnemyMgr::draw( ) {
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
 	while ( ite != _enemys.end( ) ) {
 		(*ite)->draw( );
@@ -57,26 +49,15 @@ void CharacterMgr::draw( ) {
 	}
 }
 
-int CharacterMgr::getEnemySize( ) const {
+int EnemyMgr::getEnemySize( ) const {
 	return _enemys.size( );
 }
 
-std::list<CharacterPtr> CharacterMgr::getEnemys( ) const {
+std::list<CharacterPtr> EnemyMgr::getEnemys( ) const {
 	return _enemys;
 }
 
-CharacterPtr CharacterMgr::getEnemys( int idx ) {
-	CharacterPtr result = CharacterPtr( );
-	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
-
-	for ( int i = 0; i <= idx; i++, ite++ ) {
-		result = (*ite);
-	}
-	
-	return result;
-}
-
-void CharacterMgr::initEnemys( ) {
+void EnemyMgr::initEnemys( ) {
 	for ( int i = 0; i < MAX_ENEMY_WEDTH_NUM; i++ ) {
 		for ( int j = 0; j < MAX_ENEMY_HEIGHT_NUM; j++ ) {
 			int pos_x = ( i * CHARA_WIDTH + CHARA_WIDTH / 2 ) * RATIO;
@@ -86,7 +67,7 @@ void CharacterMgr::initEnemys( ) {
 	}
 }
 
-bool CharacterMgr::outofScreen( ) {
+bool EnemyMgr::outofScreen( ) {
 	bool result = false;
 
 	auto ite = _enemys.begin( );
@@ -103,4 +84,16 @@ bool CharacterMgr::outofScreen( ) {
 	}
 
 	return result;
+}
+
+EnemyMgr::STATE EnemyMgr::checkState( ) {
+	if ( _enemys.empty( ) ) {
+		return STATE_INIT;
+	}
+		
+	if ( outofScreen( ) ) {
+		return STATE_APPROACH;
+	}
+
+	return STATE_NORMAL;
 }

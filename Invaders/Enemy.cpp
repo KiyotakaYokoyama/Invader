@@ -3,11 +3,11 @@
 #include "Bullet.h"
 #include "BulletMgr.h"
 
-static const int PROBABILITY = 1000;
+static const int PROBABILITY = 600;
 
 Enemy::Enemy( int x, int y, BulletMgrPtr bullet_mgr ) :
 Character( GRAPHIC_ENEMY, x, y ),
-_move_speed( MOVE_SPEED ),
+_move_speed( 0 ),
 _bullet_mgr( bullet_mgr ) {
 	setMoveSpeed( _move_speed );
 }
@@ -16,14 +16,6 @@ Enemy::~Enemy( ) {
 }
 
 void Enemy::action( ) {
-	actionMove( );
-	actionShoot( );
-}
-
-void Enemy::actionMove( ) {
-}
-
-void Enemy::actionShoot( ) {
 	if ( rand( ) % PROBABILITY == 0  ) {
 		_bullet_mgr->shot( BulletPtr( new Bullet( getRatioX( ), getRatioY( ), true ) ) );
 	}

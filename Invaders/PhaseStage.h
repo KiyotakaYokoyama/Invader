@@ -4,7 +4,7 @@
 #include "Phase.h"
 
 PTR( Player );
-PTR( CharacterMgr );
+PTR( EnemyMgr );
 PTR( BulletMgr );
 
 class PhaseStage : public Phase {
@@ -19,6 +19,7 @@ private:
 private:
 	NEXT update( );
 	void act( );
+	void gameover( );
 	void wait( );
 	void draw( );
 	void debugDraw( );
@@ -26,6 +27,6 @@ private:
 	int _wait_count;
 	STATE _state;
 	PlayerPtr _player;
-	CharacterMgrPtr _character_mgr;
+	EnemyMgrPtr _enemy_mgr;
 	BulletMgrPtr _bullet_mgr;
 };
