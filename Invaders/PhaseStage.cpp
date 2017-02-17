@@ -8,7 +8,7 @@
 static const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
 static const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 static const int WAIT_SCREEN_TIME = 60;
-static const int GAMEOVER_LINE = 400;
+static const int GAMEOVER_LINE = SCREEN_HEIGHT - CHARA_HEIGHT;
 
 PhaseStage::PhaseStage( ) :
 _state( STATE_NORMAL ) {

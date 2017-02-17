@@ -3,8 +3,8 @@
 #include "Enemy.h"
 #include "defin.h"
 
-const int MAX_ENEMY_WEDTH_NUM = 2;
-const int MAX_ENEMY_HEIGHT_NUM = 2;
+const int MAX_ENEMY_WEDTH_NUM = 7;
+const int MAX_ENEMY_HEIGHT_NUM = 5;
 
 EnemyMgr::EnemyMgr( BulletMgrPtr bullet_mgr ) :
 _bullet_mgr( bullet_mgr ) {
