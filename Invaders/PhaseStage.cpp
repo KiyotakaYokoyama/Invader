@@ -16,6 +16,7 @@ _state( STATE_NORMAL ) {
 	drawer->loadGraph( GRAPHIC_PLAYER, "stage/player.png" );
 	drawer->loadGraph( GRAPHIC_ENEMY, "stage/enemy.png" );
 	drawer->loadGraph( GRAPHIC_BULLET, "stage/bullet.png" );
+	drawer->loadGraph( GRAPHIC_BG, "stage/bg.png" );
 
 	_bullet_mgr = BulletMgrPtr( new BulletMgr );
 	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y, _bullet_mgr ) );
@@ -72,6 +73,11 @@ void PhaseStage::wait( ) {
 }
 
 void PhaseStage::draw( ) {
+	DrawerPtr drawer = Drawer::getTask( );
+	
+	drawer->setSprite( Drawer::Sprite(
+		Drawer::Transform( 0, 0, 0, 0, 1500, 1500, SCREEN_WIDTH, SCREEN_WIDTH ), GRAPHIC_BG ) );
+
 	_enemy_mgr->draw( );
 	_player->draw( );
 	_bullet_mgr->draw( );
