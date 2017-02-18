@@ -4,6 +4,7 @@
 #include "BulletMgr.h"
 #include "defin.h"
 #include "Drawer.h"
+#include "Sound.h"
 
 static const int PLAYER_START_POS_X = SCREEN_WIDTH * RATIO / 2;
 static const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
@@ -17,6 +18,10 @@ _state( STATE_NORMAL ) {
 	drawer->loadGraph( GRAPHIC_ENEMY, "stage/enemy.png" );
 	drawer->loadGraph( GRAPHIC_BULLET, "stage/bullet.png" );
 	drawer->loadGraph( GRAPHIC_BG, "stage/bg.png" );
+	
+	SoundPtr sound = Sound::getTask( );
+	sound->loadSE( "bomb3.wav" );
+	sound->loadSE( "shoot.wav" );
 
 	_bullet_mgr = BulletMgrPtr( new BulletMgr );
 	_player = PlayerPtr( new Player( PLAYER_START_POS_X, PLAYER_START_POS_Y, _bullet_mgr ) );

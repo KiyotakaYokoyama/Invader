@@ -6,8 +6,7 @@ static const int SCREEN_WIDTH = 960;
 static const int SCREEN_HEIGHT = 720;
 static const int CHARA_WIDTH = 75;
 static const int CHARA_HEIGHT = 75;
-static const int BULLET_WIDTH = 6;
-static const int BULLET_HEIGHT = 24;
+static const int BULLET_SIZE = 30;
 
 static const enum GRAPHIC {
 	GRAPHIC_NONE,

@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Drawer.h"
+#include "Sound.h"
 #include "PhaseTitle.h"
 #include "PhaseStage.h"
 #include "PhaseResult.h"
@@ -16,6 +17,8 @@ Game::~Game( ) {
 
 void Game::initialize( ) {
 	changeScene( );
+	SoundPtr sound = Sound::getTask( );
+	sound->playBGM( "vigilante.WAV" );
 }
 
 void Game::update( ) {

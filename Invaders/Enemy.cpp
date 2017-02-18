@@ -2,6 +2,7 @@
 #include "Defin.h"
 #include "Bullet.h"
 #include "BulletMgr.h"
+#include "Sound.h"
 
 static const int PROBABILITY = 600;
 
@@ -18,6 +19,8 @@ Enemy::~Enemy( ) {
 void Enemy::action( ) {
 	if ( rand( ) % PROBABILITY == 0  ) {
 		_bullet_mgr->shot( BulletPtr( new Bullet( getRatioX( ), getRatioY( ), true ) ) );
+		SoundPtr sound = Sound::getTask( );
+		sound->playSE( "shoot.wav" );
 	}
 }
 

@@ -22,11 +22,18 @@ void Bullet::update( ) {
 }
 
 void Bullet::draw( ) {
+	if ( _ratio_y < 0 ) {
+		return;
+	}
 	DrawerPtr drawer = Drawer::getTask( );
-	int sx = _ratio_x / RATIO;
-	int sy = _ratio_y / RATIO;
+	int sx = ( _ratio_x / RATIO ) - BULLET_SIZE / 2;
+	int sy = ( _ratio_y / RATIO ) - BULLET_SIZE;	
+	int sx2 = ( _ratio_x / RATIO ) + BULLET_SIZE / 2;
+	int sy2 = ( _ratio_y / RATIO );
 
-	drawer->setSprite( Drawer::Sprite( Drawer::Transform( sx - BULLET_WIDTH / 2, sy - BULLET_HEIGHT ), GRAPHIC_BULLET ) );
+	drawer->setSprite( Drawer::Sprite(
+		Drawer::Transform( sx, sy, 0, 0, 600, 600, sx2, sy2 ),
+			GRAPHIC_BULLET ) );
 }
 
 int Bullet::getRatioX( ) const {

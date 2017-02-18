@@ -3,6 +3,7 @@
 #include "BulletMgr.h"
 #include "Defin.h"
 #include "Keyboard.h"
+#include "Sound.h"
 
 static const int MAX_SHOOT_COUNT = 4;
 
@@ -42,8 +43,10 @@ void Player::actionShoot( ) {
 
 	if ( keyboard->isHoldKey( "Z" ) ) {
 		_shoot_count = 0;
-		int x = getRatioX( ) - BULLET_WIDTH * RATIO * 2 / 3;
+		int x = getRatioX( ) - BULLET_SIZE * RATIO * 2 / 3;
 		int y = getRatioY( ) - CHARA_HEIGHT * RATIO * 7 / 10;
 		_bullet_mgr->shot( BulletPtr( new Bullet( x, y, false ) ) );
+		SoundPtr sound = Sound::getTask( );
+		sound->playSE( "shoot.wav" );
 	}
 }

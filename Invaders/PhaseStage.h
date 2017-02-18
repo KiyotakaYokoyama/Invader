@@ -11,6 +11,7 @@ class PhaseStage : public Phase {
 public:
 	PhaseStage( );
 	virtual ~PhaseStage( );
+	long getScore( );
 private:
 	enum STATE {
 		STATE_NORMAL,

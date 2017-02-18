@@ -19,7 +19,7 @@ Phase::NEXT PhaseResult::update( ) {
 	}
 	
 	DrawerPtr drawer = Drawer::getTask( );
-	drawer->setSprite( Drawer::Sprite( Drawer::Transform( 0, 0, 0, 0, 200, 200, SCREEN_WIDTH, SCREEN_HEIGHT ), GRAPHIC_RESULT ) );
+	drawer->setSprite( Drawer::Sprite( Drawer::Transform( 0, 0, 0, 0, 1000, 1000, SCREEN_WIDTH, SCREEN_HEIGHT ), GRAPHIC_RESULT ) );
 
 	return NEXT_CONTINEU;
 }

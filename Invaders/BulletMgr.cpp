@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "EnemyMgr.h"
+#include "Sound.h"
 
 BulletMgr::BulletMgr( ) {
 }
@@ -57,13 +58,17 @@ void BulletMgr::landing( EnemyMgrPtr char_mgr ) {
 		while ( enemy_ite != enemy_list.end( ) ) {
 			int bullet_x = (*ite)->getRatioX( );
 			int bullet_y = (*ite)->getRatioY( );
-			if ( isOverlapped( (*enemy_ite), bullet_x + BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
-				 isOverlapped( (*enemy_ite), bullet_x + BULLET_WIDTH / 2, bullet_y				   ) ||
-				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
-				 isOverlapped( (*enemy_ite), bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
+			if ( isOverlapped( (*enemy_ite), bullet_x + BULLET_SIZE / 2, bullet_y + BULLET_SIZE ) ||
+				 isOverlapped( (*enemy_ite), bullet_x + BULLET_SIZE / 2, bullet_y				   ) ||
+				 isOverlapped( (*enemy_ite), bullet_x - BULLET_SIZE / 2, bullet_y + BULLET_SIZE ) ||
+				 isOverlapped( (*enemy_ite), bullet_x - BULLET_SIZE / 2, bullet_y ) ) {
 				//キャラクターに当てる
 				if ( !(*ite)->dirDown( ) ) {
 					(*enemy_ite)->hitBullet( );
+
+					SoundPtr sound = Sound::getTask( );
+					sound->playSE( "bomb3.wav" );
+
 					ite = _bullets.erase( ite );
 					break;
 				}
@@ -86,13 +91,16 @@ void BulletMgr::landing( PlayerPtr player ) {
 	while ( ite != _bullets.end( ) ) {
 		int bullet_x = (*ite)->getRatioX( );
 		int bullet_y = (*ite)->getRatioY( );
-		if ( isOverlapped( player, bullet_x + BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
-			 isOverlapped( player, bullet_x + BULLET_WIDTH / 2, bullet_y				 ) ||
-			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y + BULLET_HEIGHT ) ||
-			 isOverlapped( player, bullet_x - BULLET_WIDTH / 2, bullet_y ) ) {
+		if ( isOverlapped( player, bullet_x + BULLET_SIZE / 2, bullet_y + BULLET_SIZE ) ||
+			 isOverlapped( player, bullet_x + BULLET_SIZE / 2, bullet_y				 ) ||
+			 isOverlapped( player, bullet_x - BULLET_SIZE / 2, bullet_y + BULLET_SIZE ) ||
+			 isOverlapped( player, bullet_x - BULLET_SIZE / 2, bullet_y ) ) {
 			if ( (*ite)->dirDown( ) ) {
 				player->setDead( true );
 				ite = _bullets.erase( ite );
+
+				SoundPtr sound = Sound::getTask( );
+				sound->playSE( "bomb3.wav" );
 			}
 		}
 
