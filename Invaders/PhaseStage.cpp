@@ -11,8 +11,9 @@ static const int PLAYER_START_POS_Y = SCREEN_HEIGHT * RATIO;
 static const int WAIT_SCREEN_TIME = 60;
 static const int GAMEOVER_LINE = SCREEN_HEIGHT - CHARA_HEIGHT;
 
-PhaseStage::PhaseStage( ) :
-_state( STATE_NORMAL ) {
+PhaseStage::PhaseStage( ScorePtr score ) :
+_state( STATE_NORMAL ),
+_score( score ){
 	DrawerPtr drawer = Drawer::getTask( );
 	drawer->loadGraph( GRAPHIC_PLAYER, "stage/player.png" );
 	drawer->loadGraph( GRAPHIC_ENEMY, "stage/enemy.png" );
@@ -51,7 +52,7 @@ Phase::NEXT PhaseStage::update( ) {
 }
 
 void PhaseStage::act( ) {
-	_enemy_mgr->update( );
+	_enemy_mgr->update( _score );
 	_player->update( _enemy_mgr->getEnemys( ) );
 	_bullet_mgr->update( _player, _enemy_mgr );
 }

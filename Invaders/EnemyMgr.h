@@ -6,12 +6,13 @@
 
 PTR( Character );
 PTR( BulletMgr );
+PTR( Score );
 
 class EnemyMgr {
 public:
 	EnemyMgr( BulletMgrPtr bullet_mgr );
 	virtual ~EnemyMgr( );
-	void update( );
+	void update( ScorePtr score );
 	void draw( );
 	int getEnemySize( ) const;
 	std::list<CharacterPtr> getEnemys( ) const;

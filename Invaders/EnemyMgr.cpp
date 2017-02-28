@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "defin.h"
+#include "Score.h"
 
 const int MAX_ENEMY_WEDTH_NUM = 7;
 const int MAX_ENEMY_HEIGHT_NUM = 5;
@@ -14,7 +15,7 @@ _bullet_mgr( bullet_mgr ) {
 EnemyMgr::~EnemyMgr( ) {
 }
 
-void EnemyMgr::update( ) {
+void EnemyMgr::update( ScorePtr score ) {
 	std::list< CharacterPtr >::iterator ite = _enemys.begin( );
 
 	switch( checkState( ) ) {
@@ -31,6 +32,7 @@ void EnemyMgr::update( ) {
 		while ( ite != _enemys.end( ) ) {
 			if ( (*ite)->isDead( ) ) {
 				ite = _enemys.erase( ite );
+				score->add( 10 );
 				if ( ite == _enemys.end( ) ) break;
 			} else {
 				(*ite)->update( _enemys );

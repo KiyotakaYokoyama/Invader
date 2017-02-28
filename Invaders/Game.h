@@ -7,6 +7,7 @@
 
 PTR( Game );
 PTR( Phase );
+PTR( Score );
 
 class Game : public Task {
 public:
@@ -19,6 +20,7 @@ public:
 private:
 	void changeScene( );
 private:
+	ScorePtr _score;
 	PhasePtr _phase;
 	Phase::NEXT _next;
 };

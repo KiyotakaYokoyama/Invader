@@ -6,10 +6,11 @@
 PTR( Player );
 PTR( EnemyMgr );
 PTR( BulletMgr );
+PTR( Score );
 
 class PhaseStage : public Phase {
 public:
-	PhaseStage( );
+	PhaseStage( ScorePtr score );
 	virtual ~PhaseStage( );
 	long getScore( );
 private:
@@ -26,6 +27,7 @@ private:
 	void debugDraw( );
 private:
 	int _wait_count;
+	ScorePtr _score;
 	STATE _state;
 	PlayerPtr _player;
 	EnemyMgrPtr _enemy_mgr;

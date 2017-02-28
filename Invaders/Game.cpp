@@ -4,12 +4,14 @@
 #include "PhaseTitle.h"
 #include "PhaseStage.h"
 #include "PhaseResult.h"
+#include "Score.h"
 
 Game::Game( ) :
 _next( Phase::NEXT_TITLE ) {
 #if _DEBUG
 	_next = Phase::NEXT_STAGE;
 #endif
+	_score = ScorePtr( new Score );
 }
 
 Game::~Game( ) {
@@ -39,12 +41,13 @@ void Game::changeScene( ) {
 	switch( _next ) {
 	case Phase::NEXT_TITLE:
 		_phase = PhasePtr( new PhaseTitle );
+		_score->reset( );
 		break;
 	case Phase::NEXT_STAGE:
-		_phase = PhasePtr( new PhaseStage );		
+		_phase = PhasePtr( new PhaseStage( _score ) );		
 		break;
 	case Phase::NEXT_RESULT:
-		_phase = PhasePtr( new PhaseResult );
+		_phase = PhasePtr( new PhaseResult( _score ) );
 		break;
 	}
 }
